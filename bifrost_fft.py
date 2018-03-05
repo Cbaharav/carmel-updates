@@ -1,12 +1,12 @@
 """
 Set of programs to read and interact with output from BifrostData simulations focusing on Fourier transforms
 """
-
+import time
 import numpy as np
 import os
 from .bifrost import BifrostData, Rhoeetab, read_idl_ascii, subs2grph, bifrost_units
 from . import cstagger
-import time
+
 # from glob import glob
 # import scipy as sp
 # import imp
@@ -47,7 +47,6 @@ class FFTData(BifrostData):
         dt = self.params['dt']
         t = self.params['t']
 
-        import time
         t0 = time.time()
         # @numba.jit(['float64[:, :, ::1](float64[:, :, ::1], float64[:, :, ::1], float64[::1], float64[::1])'])
         def fftHelper(preTransform, transformed, dt, t):
