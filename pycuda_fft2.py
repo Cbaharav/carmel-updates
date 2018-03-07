@@ -11,7 +11,7 @@ dtype = np.complex64
 api = cluda.cuda_api()
 thr = api.Thread.create()
 
-shape = (100, 100, 100, 3)
+shape = (512, 2, 544, 3)
 
 #sending the array from host to array and creating result array on device
 a = np.random.randn(*shape).astype(dtype)
@@ -27,17 +27,17 @@ fftc(res_dev, a_dev)
 t1 = time.time()
 print('Time 1: ', t1 - t0)
 
-#tried to run compiled fft function with different input (it didn't work -- the output stayed the same)
-t4 = time.time()
+#tried to run compiled fft function with different input (it worked! but still slower than numpy)
 b = np.random.randn(*shape).astype(dtype)
-b_dev = thr.to_device(a)
+b_dev = thr.to_device(b)
+t4 = time.time()
 fftc(res_dev, b_dev)
 t5 = time.time()
 print('Time 1.5: ', t5 - t4)
 
 #numpy fft to check
 t2 = time.time()
-res_reference = np.fft.fft(a, axis = lastAxis)
+res_reference = np.fft.fft(b, axis = lastAxis)
 t3 = time.time()
 print('Time 2: ', t3 - t2)
 
