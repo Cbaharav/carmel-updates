@@ -27,7 +27,7 @@ fftc(res_dev, a_dev)
 t1 = time.time()
 print('Time 1: ', t1 - t0)
 
-#tried to run compiled fft function with different input (it worked! but still slower than numpy)
+#tried to run compiled fft function with different input (it worked!)
 b = np.random.randn(*shape).astype(dtype)
 b_dev = thr.to_device(b)
 t4 = time.time()
