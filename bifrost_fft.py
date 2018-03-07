@@ -6,17 +6,17 @@ import numpy as np
 import os
 from .bifrost import BifrostData, Rhoeetab, read_idl_ascii, subs2grph, bifrost_units
 from . import cstagger
+import imp
 
 # from glob import glob
 # import scipy as sp
-# import imp
 # import scipy.ndimage as ndimage
 
-# try:
-#     imp.find_module('pycuda')
-#     found = True
-# except ImportError:
-#     found = False
+try:
+    imp.find_module('pycuda')
+    found = True
+except ImportError:
+    found = False
 
 class FFTData(BifrostData):
 
@@ -67,6 +67,30 @@ class FFTData(BifrostData):
                 evenDt = dt[0]
 
             freq = np.fft.fftshift(np.fft.fftfreq(np.size(dt), evenDt * 100))
+
+            if found:
+                print('found')
+                from reikna import cluda
+                from reikna.fft import fft
+                from numpy.linalg import norm
+
+                api = cluda.cuda_api()
+                thr = api.Thread.create()
+
+                shape = np.shape(preTransform)
+                preTransform = np.complex128 (preTransform)
+                pre_dev = thr.to_device(preTransform)
+                transformed_dev = thr.array(shape, dtype = np.complex128)
+
+                lastAxis = len(shape) - 1
+                fft = fft.FFT(preTransform, axes = (lastAxis, ))
+                fftc = fft.compile(thr)
+                fftc(transformed_dev, pre_dev)
+                transformed = transformed_dev.get()
+                transformed = np.abs(np.fft.fftshift(transformed))
+
+
+
             transformed = np.abs(np.fft.fftshift((np.fft.fft(preTransform)), axes = -1))
             output = {'freq': freq, 'ftCube': transformed}
             t1 = time.time()
