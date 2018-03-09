@@ -18,6 +18,11 @@ try:
 except ImportError:
     found = False
 
+if found:
+    from reikna import cluda
+    from reikna.fft import fft
+
+
 class FFTData(BifrostData):
 
     """
@@ -27,6 +32,11 @@ class FFTData(BifrostData):
 
     def __init__(self, *args, **kwargs):
         super(FFTData, self).__init__(*args, **kwargs)
+        self.preCompFunc = None
+        self.preCompShape = None
+        self.transformed_dev = None
+        self.api = None
+        self.thr = None
 
 
     def get_fft(self, quantity, snap, iix = None, iiy = None, iiz = None):
@@ -48,7 +58,6 @@ class FFTData(BifrostData):
         t = self.params['t']
 
         t0 = time.time()
-        # @numba.jit(['float64[:, :, ::1](float64[:, :, ::1], float64[:, :, ::1], float64[::1], float64[::1])'])
         def fftHelper(preTransform, transformed, dt, t):
 
             uneven = False
@@ -69,29 +78,48 @@ class FFTData(BifrostData):
             freq = np.fft.fftshift(np.fft.fftfreq(np.size(dt), evenDt * 100))
 
             if found:
-                print('found')
-                from reikna import cluda
-                from reikna.fft import fft
-                from numpy.linalg import norm
-
-                api = cluda.cuda_api()
-                thr = api.Thread.create()
-
                 shape = np.shape(preTransform)
                 preTransform = np.complex128 (preTransform)
-                pre_dev = thr.to_device(preTransform)
-                transformed_dev = thr.array(shape, dtype = np.complex128)
 
-                lastAxis = len(shape) - 1
-                fft = fft.FFT(preTransform, axes = (lastAxis, ))
-                fftc = fft.compile(thr)
-                fftc(transformed_dev, pre_dev)
-                transformed = transformed_dev.get()
-                transformed = np.abs(np.fft.fftshift(transformed))
+                tr = time.time()
+                if self.api is None:
+                    print('api is None')
+                    self.api = cluda.cuda_api()
+                    self.thr = self.api.Thread.create()
 
+                if not self.preCompShape == shape:
+                    print('shape is new')
+                    self.preCompShape = shape
+                    lastAxis = len(shape) - 1
+                    fft1 = fft.FFT(preTransform, axes = (lastAxis, ))
+                    self.preCompFunc = fft1.compile(self.thr)
+                    self.transformed_dev = self.thr.array(shape, dtype = np.complex128)                 
+                    # self.preCompFunc(transformed_dev, pre_dev)
+                tl = time.time()
+                print('compile time: ', tl - tr)
 
+                tz = time.time()
+                pre_dev = self.thr.to_device(preTransform)
+                ty = time.time()
+                print('pre_dev time: ', ty - tz)
 
-            transformed = np.abs(np.fft.fftshift((np.fft.fft(preTransform)), axes = -1))
+                tq = time.time()
+                self.preCompFunc(self.transformed_dev, pre_dev)
+                tw = time.time()
+                print('function time: ', tw - tq)
+
+                th = time.time()
+                transformed = self.transformed_dev.get()
+                tp = time.time()
+                print('getting transformed time: ', tp - th)
+                transformed = np.abs(np.fft.fftshift(transformed, axes = -1))
+
+                # shows that fft with reikna returns the same values as the numpy fft
+                # transformed2 = np.abs(np.fft.fftshift(np.fft.fft(preTransform), axes = -1))
+                # print(np.allclose(transformed, transformed2, atol = 1e-15))
+
+            else:
+                transformed = np.abs(np.fft.fftshift((np.fft.fft(preTransform)), axes = -1))
             output = {'freq': freq, 'ftCube': transformed}
             t1 = time.time()
             print(t1-t0)
