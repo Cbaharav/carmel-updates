@@ -20,8 +20,8 @@ In .cshrc add a path for helita: <br />
 
   &nbsp;&nbsp;&nbsp; setenv HELITA "~/helita-master/helita"
 
-Basics
-------
+BifrostData Objects
+-------------------
 
 bifrost.py uses BifrostData objects. This Bifrost Data object reads snapshot 430 from simulation 'cb10f' from directory '/net/opal/Volumes/Amnesia/mpi3drun/Granflux':
 
@@ -29,3 +29,10 @@ bifrost.py uses BifrostData objects. This Bifrost Data object reads snapshot 430
 &nbsp;&nbsp;&nbsp; >>> dd = br.BifrostData('cb10f', fdir = '/net/opal/Volumes/Amnesia/mpi3drun/Granflux')
 
 The snapshot(s) being read can be defined when creating the object, or set/changed anytime later. Snaps can be ints, arrays, or lists. 
+
+Getting Variables & Quantities
+------------------------------
+
+get_var and get_varTime can be used to read variables as well as to calculate quantities (with a call to _get_quantity). iix, iiy, and iiz can be specified to slice the return array (they can be ints, arrays, or lists). To get variable 'r' with only values at y = 200, z = 5, and z = 7:
+
+&nbsp;&nbsp;&nbsp; >>> var1 = dd.get_var('r', iiy = 200, iiz = [5, 7])
