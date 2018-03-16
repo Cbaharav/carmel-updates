@@ -23,7 +23,9 @@ In .cshrc add a path for helita: <br />
 Basics
 ------
 
-bifrost.py uses BifrostData objects. To make a BifrostData object:
+bifrost.py uses BifrostData objects. This Bifrost Data object reads snapshot 430 from simulation 'cb10f' from directory '/net/opal/Volumes/Amnesia/mpi3drun/Granflux':
 
 &nbsp;&nbsp;&nbsp; >>> from helita.sim import bifrost as br <br />
-&nbsp;&nbsp;&nbsp; >>> dd = br.BifrostData('file root name', fdir = 'directory path')
+&nbsp;&nbsp;&nbsp; >>> dd = br.BifrostData('cb10f', fdir = '/net/opal/Volumes/Amnesia/mpi3drun/Granflux')
+
+The snapshot(s) being read can be defined when creating the object, or set/changed anytime later. Snaps can be ints, arrays, or lists. 
