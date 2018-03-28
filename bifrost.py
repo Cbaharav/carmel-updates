@@ -802,7 +802,7 @@ class BifrostData(object):
                     setattr(self, dim + 'Split', val)
 
                 result = np.concatenate(pool.starmap(task, zip(self.xaSplit, self.yaSplit, self.zaSplit, self.xbSplit, self.ybSplit, self.zbSplit)))
-                print('Threading time: ', time.time() - t0)
+                print('Threading Time: ', time.time() - t0)
 
             else: 
                 x1 = self.get_var(v1 + 'xc', self.snap)
@@ -827,7 +827,7 @@ class BifrostData(object):
 
                     v1Mag = np.sqrt(perX**2 + perY**2 + perZ**2)
                     result = v1Mag
-                print('Non-threading time: ', time.time() - t0)
+                print('Non-threading Time: ', time.time() - t0)
 
             return result
 
