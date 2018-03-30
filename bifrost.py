@@ -8,6 +8,8 @@ from glob import glob
 from . import cstagger
 import numba
 import scipy as sp
+from multiprocessing.dummy import Pool as ThreadPool
+import time
 
 
 class BifrostData(object):
@@ -202,7 +204,7 @@ class BifrostData(object):
         for key in self.paramList[0]:
             self.params[key] = np.array(
                 [self.paramList[i][key] for i in range(
-                                            0, len(self.paramList))])
+                    0, len(self.paramList))])
 
     def __read_mesh(self, meshfile):
         """
@@ -470,11 +472,10 @@ class BifrostData(object):
 
         if np.shape(val) != (self.xLength, self.yLength, self.zLength):
             return np.reshape(val[self.iix, self.iiy, self.iiz], (
-                                  self.xLength, self.yLength, 
-                                  self.zLength))
-        else: 
+                self.xLength, self.yLength,
+                self.zLength))
+        else:
             return val
-
 
     def _get_simple_var(self, var, order='F', mode='r', *args, **kwargs):
         """
@@ -581,14 +582,14 @@ class BifrostData(object):
             return self.get_var('e') / self.get_var('r')
         elif var == 's':   # entropy?
             entr = np.log(self.get_var(
-                            'p')) - self.params['gamma'] * np.log(
-                                    self.get_var('r'))
+                'p')) - self.params['gamma'] * np.log(
+                self.get_var('r'))
             return entr
         # else:
             # raise ValueError(('_get_composite_var: do not know (yet) how to'
             # 'get composite variable %s.' % var))
 
-    def _get_quantity(self, quant, *args, **kwargs):
+    def _get_quantity(self, quant, numThreads = 1, *args, **kwargs):
         """
         Calculates a quantity from the simulation quantiables.
 
@@ -637,10 +638,24 @@ class BifrostData(object):
                         'mn', 'man', 'hp', 'vax', 'vay', 'vaz',
                         'hx', 'hy', 'hz', 'kx', 'ky', 'kz']
 
+
         if (np.size(self.snap) > 1):
             currSnap = self.snap[self.snapInd]
         else:
             currSnap = self.snap
+
+        def threadIt(task, numThreads, *args):
+            # split arg arrays
+            args = list(args)
+
+            for index in range(np.shape(args)[0]):
+                args[index] = np.array_split(args[index], numThreads)
+
+            # make threadpool, task = task, with zipped args
+            pool = ThreadPool(processes = numThreads)
+            result = np.concatenate(pool.starmap(task, zip(*args)))
+            return result
+
 
         if (RATIO_QUANT in quant):
             # Calculate module of vector quantity
@@ -760,13 +775,11 @@ class BifrostData(object):
         elif quant[1:4] in PROJ_QUANT:
             # projects v1 onto v2
 
-            from multiprocessing.dummy import Pool as ThreadPool
-            import time
 
             v1 = quant[0]
             v2 = quant[4]
 
-            if quant[5] is 't':
+            if numThreads > 1:
                 
                 self.xa = self.get_var(v1 + 'xc', self.snap)
                 self.ya = self.get_var(v1 + 'yc', self.snap)
@@ -794,17 +807,22 @@ class BifrostData(object):
                     return results
 
                 t0 = time.time()
-                nofThreads = 10
-                pool = ThreadPool(processes = nofThreads)
+                result = threadIt(task, numThreads, self.xa, self.ya, self.za, self.xb, self.yb, self.zb)
+                print('Threading time: ', time.time() - t0)
+                # t0 = time.time()
+                # nofThreads = 10
+                # pool = ThreadPool(processes = nofThreads)
 
-                for dim in ['xa', 'ya', 'za', 'xb', 'yb', 'zb']:
-                    val = np.array_split(getattr(self, dim), nofThreads)
-                    setattr(self, dim + 'Split', val)
+                # for dim in ['xa', 'ya', 'za', 'xb', 'yb', 'zb']:
+                #     val = np.array_split(getattr(self, dim), nofThreads)
+                #     setattr(self, dim + 'Split', val)
 
-                result = np.concatenate(pool.starmap(task, zip(self.xaSplit, self.yaSplit, self.zaSplit, self.xbSplit, self.ybSplit, self.zbSplit)))
-                print('Threading Time: ', time.time() - t0)
+                # result = np.concatenate(pool.starmap(task, zip(self.xaSplit, self.yaSplit, self.zaSplit, self.xbSplit, self.ybSplit, self.zbSplit)))
+                # print('Threading time: ', time.time() - t0)
+
 
             else: 
+                
                 x1 = self.get_var(v1 + 'xc', self.snap)
                 y1 = self.get_var(v1 + 'yc', self.snap)
                 z1 = self.get_var(v1 + 'zc', self.snap)
@@ -827,7 +845,7 @@ class BifrostData(object):
 
                     v1Mag = np.sqrt(perX**2 + perY**2 + perZ**2)
                     result = v1Mag
-                print('Non-threading Time: ', time.time() - t0)
+                print('Non-threading time: ', time.time() - t0)
 
             return result
 
@@ -857,7 +875,7 @@ class BifrostData(object):
                     return np.zeros_like(var)
                 else:
                     return cstagger.do(var, derv[0]) - cstagger.do(
-                            self.get_var(q + varsn[1]), derv[1])
+                        self.get_var(q + varsn[1]), derv[1])
 
         elif quant in FLUX_QUANT:
             axis = quant[-1]
@@ -893,8 +911,8 @@ class BifrostData(object):
                         self.params['gamma'][0] * var / self.get_var('r'))
                 elif quant == 's':
                     return np.log(
-                            var) - self.params['gamma'][0] * np.log(
-                            self.get_var('r'))
+                        var) - self.params['gamma'][0] * np.log(
+                        self.get_var('r'))
                 elif quant == 'beta':
                     return 2 * var / self.get_var('b2')
 
@@ -925,7 +943,7 @@ class BifrostData(object):
             if quant in ['ke']:
                 var = self.get_var('r')
                 return self.get_var('u2') * var * 0.5
-                
+
         else:
             raise ValueError(('get_quantity: do not know (yet) how to '
                               'calculate quantity %s. Note that simple_var '
