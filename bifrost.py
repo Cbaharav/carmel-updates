@@ -621,6 +621,11 @@ class BifrostData(object):
         - SQUARE_QUANT: allows to calculate the squared modules for any
                         vector. It must end with 2 after the root lelter
                         of the varname, e.g. 'u2'.
+        - PROJ_QUANT:   allows to calculate the vector projection of one
+                        quantity onto another. It can also find the
+                        perpendicular component. Add 'v' at the end to
+                        return projection in vector form, 's' to return
+                        the magnitude of the vector, eg.'uparbv'
         """
         quant = quant.lower()
         DERIV_QUANT = ['dxup', 'dyup', 'dzup', 'dxdn', 'dydn', 'dzdn']
@@ -637,6 +642,7 @@ class BifrostData(object):
         PLASMA_QUANT = ['beta', 'va', 'cs', 's', 'ke',
                         'mn', 'man', 'hp', 'vax', 'vay', 'vaz',
                         'hx', 'hy', 'hz', 'kx', 'ky', 'kz']
+        WAVE_QUANT = ['alf', 'fast', 'long']
 
 
         if (np.size(self.snap) > 1):
@@ -778,6 +784,7 @@ class BifrostData(object):
 
             v1 = quant[0]
             v2 = quant[4]
+            # V = quant[5] == 'v'
 
             if numThreads > 1:
                 
@@ -793,7 +800,12 @@ class BifrostData(object):
                     v2x, v2y, v2z = x2 / v2Mag, y2 / v2Mag, z2 / v2Mag
                     parScal = x1 * v2x + y1 * v2y + z1 * v2z
                     parX, parY, parZ = parScal * v2x, parScal * v2y, parScal * v2z
-                    results = np.abs(parScal)
+                    results - np.abs(parScal)
+
+                    # if V:
+                    #     results = np.stack((parX, parY, parZ))
+                    # else:
+                    #     results = np.abs(parScal)
 
                     if quant[1:4] == 'per':
                         perX = x1 - parX
@@ -802,6 +814,11 @@ class BifrostData(object):
 
                         v1Mag = np.sqrt(perX**2 + perY**2 + perZ**2)
                         results = v1Mag
+
+                        # if V:
+                        #     results = np.stack((perX, perY, perZ))
+                        # else:
+                        #     results = v1Mag
 
                     print('results shape: ', np.shape(results))
                     return results
@@ -836,7 +853,12 @@ class BifrostData(object):
 
                 parScal = x1 * v2x + y1 * v2y + z1 * v2z
                 parX, parY, parZ = parScal * v2x, parScal * v2y, parScal * v2z
-                result = np.abs(parScal)
+                result = parScal
+
+                # if V:
+                #     result = np.stack((parX, parY, parZ))
+                # else:
+                #     result = np.abs(parScal)
 
                 if quant[1:4] == 'per':
                     perX = x1 - parX
@@ -845,6 +867,12 @@ class BifrostData(object):
 
                     v1Mag = np.sqrt(perX**2 + perY**2 + perZ**2)
                     result = v1Mag
+                        
+                    # if V:
+                    #     result = np.stack((perX, perY, perZ))
+                    # else:
+                    #     result = v1Mag
+
                 print('Non-threading time: ', time.time() - t0)
 
             return result
@@ -943,6 +971,48 @@ class BifrostData(object):
             if quant in ['ke']:
                 var = self.get_var('r')
                 return self.get_var('u2') * var * 0.5
+
+        elif quant in WAVE_QUANT:
+            bx = self.get_var('bxc')
+            by = self.get_var('byc')
+            bz = self.get_var('bzc')
+            bMag = np.sqrt(bx**2 + by**2 + bz**2)
+            bx, by, bz = bx / bMag, by / bMag, bz / bMag
+                
+            unitB = np.stack((bx, by, bz))
+
+            if quant == 'alf':
+                uperb= self.get_var('uperb')
+                uperbVect = uperb * unitB
+
+                # cross product
+                curlX = cstagger.do(uperbVect[2], 'ddydn') - cstagger.do(uperbVect[1], 'ddzdn')
+                curlY = - cstagger.do(uperbVect[2], 'ddxdn') + cstagger.do(uperbVect[0], 'ddzdn')
+                curlZ = cstagger.do(uperbVect[1], 'ddydn') - cstagger.do(uperbVect[0], 'ddydn')
+                curl = np.stack((curlX, curlY, curlZ))
+
+                # dot product
+                result = (unitB * curl).sum(0)
+
+
+            elif quant == 'fast':
+                uperb = self.get_var('uperb')
+                uperbVect = uperb * unitB
+
+                result = cstagger.do(uperbVect[0], 'ddxdn') + cstagger.do(uperbVect[1], 'ddydn') + cstagger.do(uperbVect[2], 'ddzdn')
+
+            else:
+                ux = self.get_var('uxc')
+                uy = self.get_var('uyc')
+                uz = self.get_var('uzc')
+
+                dot1 = ux*bx + uy*by + uz*bz
+                grad = np.stack((cstagger.do(dot1, 'ddxdn'), cstagger.do(dot1, 'ddydn'), cstagger.do(dot1, 'ddzdn')))
+                
+                result = (unitB * grad).sum(0)
+
+
+            return result
 
         else:
             raise ValueError(('get_quantity: do not know (yet) how to '
