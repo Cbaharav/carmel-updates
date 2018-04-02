@@ -589,7 +589,7 @@ class BifrostData(object):
             # raise ValueError(('_get_composite_var: do not know (yet) how to'
             # 'get composite variable %s.' % var))
 
-    def _get_quantity(self, quant, numThreads = 1, *args, **kwargs):
+    def _get_quantity(self, quant, numThreads=1, *args, **kwargs):
         """
         Calculates a quantity from the simulation quantiables.
 
@@ -644,7 +644,6 @@ class BifrostData(object):
                         'hx', 'hy', 'hz', 'kx', 'ky', 'kz']
         WAVE_QUANT = ['alf', 'fast', 'long']
 
-
         if (np.size(self.snap) > 1):
             currSnap = self.snap[self.snapInd]
         else:
@@ -658,10 +657,9 @@ class BifrostData(object):
                 args[index] = np.array_split(args[index], numThreads)
 
             # make threadpool, task = task, with zipped args
-            pool = ThreadPool(processes = numThreads)
+            pool = ThreadPool(processes=numThreads)
             result = np.concatenate(pool.starmap(task, zip(*args)))
             return result
-
 
         if (RATIO_QUANT in quant):
             # Calculate module of vector quantity
@@ -781,13 +779,12 @@ class BifrostData(object):
         elif quant[1:4] in PROJ_QUANT:
             # projects v1 onto v2
 
-
             v1 = quant[0]
             v2 = quant[4]
             # V = quant[5] == 'v'
 
             if numThreads > 1:
-                
+
                 self.xa = self.get_var(v1 + 'xc', self.snap)
                 self.ya = self.get_var(v1 + 'yc', self.snap)
                 self.za = self.get_var(v1 + 'zc', self.snap)
@@ -799,7 +796,9 @@ class BifrostData(object):
                     v2Mag = np.sqrt(x2**2 + y2**2 + z2**2)
                     v2x, v2y, v2z = x2 / v2Mag, y2 / v2Mag, z2 / v2Mag
                     parScal = x1 * v2x + y1 * v2y + z1 * v2z
-                    parX, parY, parZ = parScal * v2x, parScal * v2y, parScal * v2z
+                    parX = parScal * v2x
+                    parY = parScal * v2y
+                    parZ = parScal * v2z
                     results - np.abs(parScal)
 
                     # if V:
@@ -824,7 +823,8 @@ class BifrostData(object):
                     return results
 
                 t0 = time.time()
-                result = threadIt(task, numThreads, self.xa, self.ya, self.za, self.xb, self.yb, self.zb)
+                result = threadIt(task, numThreads, self.xa,
+                                  self.ya, self.za, self.xb, self.yb, self.zb)
                 print('Threading time: ', time.time() - t0)
                 # t0 = time.time()
                 # nofThreads = 10
@@ -834,12 +834,13 @@ class BifrostData(object):
                 #     val = np.array_split(getattr(self, dim), nofThreads)
                 #     setattr(self, dim + 'Split', val)
 
-                # result = np.concatenate(pool.starmap(task, zip(self.xaSplit, self.yaSplit, self.zaSplit, self.xbSplit, self.ybSplit, self.zbSplit)))
+                # result = np.concatenate(pool.starmap(task, zip(self.xaSplit,
+                #           self.yaSplit, self.zaSplit, self.xbSplit,
+                #           self.ybSplit, self.zbSplit)))
                 # print('Threading time: ', time.time() - t0)
 
+            else:
 
-            else: 
-                
                 x1 = self.get_var(v1 + 'xc', self.snap)
                 y1 = self.get_var(v1 + 'yc', self.snap)
                 z1 = self.get_var(v1 + 'zc', self.snap)
@@ -867,7 +868,7 @@ class BifrostData(object):
 
                     v1Mag = np.sqrt(perX**2 + perY**2 + perZ**2)
                     result = v1Mag
-                        
+
                     # if V:
                     #     result = np.stack((perX, perY, perZ))
                     # else:
@@ -978,28 +979,32 @@ class BifrostData(object):
             bz = self.get_var('bzc')
             bMag = np.sqrt(bx**2 + by**2 + bz**2)
             bx, by, bz = bx / bMag, by / bMag, bz / bMag
-                
+
             unitB = np.stack((bx, by, bz))
 
             if quant == 'alf':
-                uperb= self.get_var('uperb')
+                uperb = self.get_var('uperb')
                 uperbVect = uperb * unitB
 
                 # cross product
-                curlX = cstagger.do(uperbVect[2], 'ddydn') - cstagger.do(uperbVect[1], 'ddzdn')
-                curlY = - cstagger.do(uperbVect[2], 'ddxdn') + cstagger.do(uperbVect[0], 'ddzdn')
-                curlZ = cstagger.do(uperbVect[1], 'ddydn') - cstagger.do(uperbVect[0], 'ddydn')
+                curlX = cstagger.do(
+                    uperbVect[2], 'ddydn') - cstagger.do(uperbVect[1], 'ddzdn')
+                curlY = - \
+                    cstagger.do(uperbVect[2], 'ddxdn') + \
+                    cstagger.do(uperbVect[0], 'ddzdn')
+                curlZ = cstagger.do(
+                    uperbVect[1], 'ddydn') - cstagger.do(uperbVect[0], 'ddydn')
                 curl = np.stack((curlX, curlY, curlZ))
 
                 # dot product
                 result = (unitB * curl).sum(0)
 
-
             elif quant == 'fast':
                 uperb = self.get_var('uperb')
                 uperbVect = uperb * unitB
 
-                result = cstagger.do(uperbVect[0], 'ddxdn') + cstagger.do(uperbVect[1], 'ddydn') + cstagger.do(uperbVect[2], 'ddzdn')
+                result = cstagger.do(uperbVect[0], 'ddxdn') + cstagger.do(
+                    uperbVect[1], 'ddydn') + cstagger.do(uperbVect[2], 'ddzdn')
 
             else:
                 ux = self.get_var('uxc')
@@ -1007,10 +1012,10 @@ class BifrostData(object):
                 uz = self.get_var('uzc')
 
                 dot1 = ux*bx + uy*by + uz*bz
-                grad = np.stack((cstagger.do(dot1, 'ddxdn'), cstagger.do(dot1, 'ddydn'), cstagger.do(dot1, 'ddzdn')))
-                
-                result = (unitB * grad).sum(0)
+                grad = np.stack((cstagger.do(dot1, 'ddxdn'), cstagger.do(
+                    dot1, 'ddydn'), cstagger.do(dot1, 'ddzdn')))
 
+                result = (unitB * grad).sum(0)
 
             return result
 
