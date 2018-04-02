@@ -781,85 +781,22 @@ class BifrostData(object):
 
             v1 = quant[0]
             v2 = quant[4]
-            # V = quant[5] == 'v'
 
-            if numThreads > 1:
+            self.xa = self.get_var(v1 + 'xc', self.snap)
+            self.ya = self.get_var(v1 + 'yc', self.snap)
+            self.za = self.get_var(v1 + 'zc', self.snap)
+            self.xb = self.get_var(v2 + 'xc', self.snap)
+            self.yb = self.get_var(v2 + 'yc', self.snap)
+            self.zb = self.get_var(v2 + 'zc', self.snap)
 
-                self.xa = self.get_var(v1 + 'xc', self.snap)
-                self.ya = self.get_var(v1 + 'yc', self.snap)
-                self.za = self.get_var(v1 + 'zc', self.snap)
-                self.xb = self.get_var(v2 + 'xc', self.snap)
-                self.yb = self.get_var(v2 + 'yc', self.snap)
-                self.zb = self.get_var(v2 + 'zc', self.snap)
-
-                def task(x1, y1, z1, x2, y2, z2):
-                    v2Mag = np.sqrt(x2**2 + y2**2 + z2**2)
-                    v2x, v2y, v2z = x2 / v2Mag, y2 / v2Mag, z2 / v2Mag
-                    parScal = x1 * v2x + y1 * v2y + z1 * v2z
-                    parX = parScal * v2x
-                    parY = parScal * v2y
-                    parZ = parScal * v2z
-                    results - np.abs(parScal)
-
-                    # if V:
-                    #     results = np.stack((parX, parY, parZ))
-                    # else:
-                    #     results = np.abs(parScal)
-
-                    if quant[1:4] == 'per':
-                        perX = x1 - parX
-                        perY = y1 - parY
-                        perZ = z1 - parZ
-
-                        v1Mag = np.sqrt(perX**2 + perY**2 + perZ**2)
-                        results = v1Mag
-
-                        # if V:
-                        #     results = np.stack((perX, perY, perZ))
-                        # else:
-                        #     results = v1Mag
-
-                    print('results shape: ', np.shape(results))
-                    return results
-
-                t0 = time.time()
-                result = threadIt(task, numThreads, self.xa,
-                                  self.ya, self.za, self.xb, self.yb, self.zb)
-                print('Threading time: ', time.time() - t0)
-                # t0 = time.time()
-                # nofThreads = 10
-                # pool = ThreadPool(processes = nofThreads)
-
-                # for dim in ['xa', 'ya', 'za', 'xb', 'yb', 'zb']:
-                #     val = np.array_split(getattr(self, dim), nofThreads)
-                #     setattr(self, dim + 'Split', val)
-
-                # result = np.concatenate(pool.starmap(task, zip(self.xaSplit,
-                #           self.yaSplit, self.zaSplit, self.xbSplit,
-                #           self.ybSplit, self.zbSplit)))
-                # print('Threading time: ', time.time() - t0)
-
-            else:
-
-                x1 = self.get_var(v1 + 'xc', self.snap)
-                y1 = self.get_var(v1 + 'yc', self.snap)
-                z1 = self.get_var(v1 + 'zc', self.snap)
-                x2 = self.get_var(v2 + 'xc', self.snap)
-                y2 = self.get_var(v2 + 'yc', self.snap)
-                z2 = self.get_var(v2 + 'zc', self.snap)
-
-                t0 = time.time()
+            def task(x1, y1, z1, x2, y2, z2):
                 v2Mag = np.sqrt(x2**2 + y2**2 + z2**2)
                 v2x, v2y, v2z = x2 / v2Mag, y2 / v2Mag, z2 / v2Mag
-
                 parScal = x1 * v2x + y1 * v2y + z1 * v2z
-                parX, parY, parZ = parScal * v2x, parScal * v2y, parScal * v2z
-                result = parScal
-
-                # if V:
-                #     result = np.stack((parX, parY, parZ))
-                # else:
-                #     result = np.abs(parScal)
+                parX = parScal * v2x
+                parY = parScal * v2y
+                parZ = parScal * v2z
+                results = np.abs(parScal)
 
                 if quant[1:4] == 'per':
                     perX = x1 - parX
@@ -867,13 +804,20 @@ class BifrostData(object):
                     perZ = z1 - parZ
 
                     v1Mag = np.sqrt(perX**2 + perY**2 + perZ**2)
-                    result = v1Mag
+                    results = v1Mag
 
-                    # if V:
-                    #     result = np.stack((perX, perY, perZ))
-                    # else:
-                    #     result = v1Mag
+                print('results shape: ', np.shape(results))
+                return results
 
+            t0 = time.time()
+            if numThreads > 1:
+                result = threadIt(task, numThreads, self.xa,
+                                  self.ya, self.za, self.xb, self.yb, self.zb)
+                print('Threading time: ', time.time() - t0)
+
+            else:
+                result = task(self.xa, self.ya, self.za,
+                              self.xb, self.yb, self.zb)
                 print('Non-threading time: ', time.time() - t0)
 
             return result
