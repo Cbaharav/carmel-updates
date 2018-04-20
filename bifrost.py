@@ -937,7 +937,7 @@ class BifrostData(object):
                     cstagger.do(uperbVect[2], 'ddxdn') + \
                     cstagger.do(uperbVect[0], 'ddzdn')
                 curlZ = cstagger.do(
-                    uperbVect[1], 'ddydn') - cstagger.do(uperbVect[0], 'ddydn')
+                    uperbVect[1], 'ddxdn') - cstagger.do(uperbVect[0], 'ddydn')
                 curl = np.stack((curlX, curlY, curlZ))
 
                 # dot product
