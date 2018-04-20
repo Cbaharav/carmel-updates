@@ -8,6 +8,7 @@ import os
 from .bifrost import BifrostData, Rhoeetab, read_idl_ascii
 from . import cstagger
 import imp
+from multiprocessing.dummy import Pool as ThreadPool
 
 try:
     imp.find_module('pycuda')
@@ -38,8 +39,15 @@ class FFTData(BifrostData):
         self.transformed_dev = None
         self.api = None
         self.thr = None
+        self.found = found
 
-    def get_fft(self, quantity, snap, iix=None, iiy=None, iiz=None):
+
+
+    def use_gpu(self, choice):
+        self.found = choice
+
+
+    def get_fft(self, quantity, snap, numThreads = 1, iix=None, iiy=None, iiz=None):
         """
         Calculates FFT (by calling fftHelper)
 
@@ -61,8 +69,21 @@ class FFTData(BifrostData):
             uses reikna (cuda & openCL) if available
         """
 
+        # def threadIt(task, numThreads, *args):
+        #     # split arg arrays
+        #     args = list(args)
+
+        #     for index in range(np.shape(args)[0]):
+        #         args[index] = np.array_split(args[index], numThreads, axis = 0)
+
+        #     # make threadpool, task = task, with zipped args
+        #     pool = ThreadPool(processes = numThreads)
+        #     result = np.concatenate(pool.starmap(task, zip(*args)))
+        #     return result
+
         # gets data cube, already sliced with iix/iiy/iiz
         preTransform = self.get_varTime(quantity, snap, iix, iiy, iiz)
+        print('done with loading vars')
 
         # gets rid of array dimensions of 1
         preTransform = np.squeeze(preTransform)
@@ -91,11 +112,87 @@ class FFTData(BifrostData):
             else:
                 evenDt = dt[0]
 
+
+            def threadIt(task, numThreads, *args):
+                # split arg arrays
+                args = list(args)
+
+                for index in range(np.shape(args)[0]):
+                    args[index] = np.array_split(args[index], numThreads)
+
+                # make threadpool, task = task, with zipped args
+                pool = ThreadPool(processes=numThreads)
+                result = np.concatenate(pool.map(task, args))
+                return result
+
             # finds frequency with evenly spaced times
             freq = np.fft.fftshift(np.fft.fftfreq(np.size(dt), evenDt * 100))
 
+            if numThreads > 1:
+                def task(arr):
+                    # results = np.abs(np.fft.fftshift(
+                    #     (np.fft.fft(preTransform)), axes=-1))
+                    # return results
+                    shape = np.shape(arr)
+                    print(shape)
+                    preTransform = np.complex128(arr)
+
+                    t2 = time.time()
+                    # sets api & creates thread if not preloaded
+                    if self.api is None:
+                        print('api is None')
+                        self.api = cluda.cuda_api()
+                        self.thr = self.api.Thread.create()
+
+                    # creates new computation & recompiles if new input shape
+                    # if same as previous input shape, uses the stored function
+                    if not self.preCompShape == shape:
+                        print('shape is new')
+                        self.preCompShape = shape
+                        lastAxis = len(shape) - 1
+                        fft1 = fft.FFT(preTransform, axes=(lastAxis, ))
+                        self.preCompFunc = fft1.compile(self.thr)
+                        self.transformed_dev = self.thr.empty_like(preTransform)
+
+                    t3 = time.time()
+                    print('compile time: ', t3 - t2)
+
+                    # sends preTransform array to device
+                    t4 = time.time()
+                    pre_dev = self.thr.to_device(preTransform)
+                    t5 = time.time()
+                    print('sending pre to dev time: ', t5 - t4)
+
+                    # runs compiled function with output arr and input arr
+                    t6 = time.time()
+                    self.preCompFunc(self.transformed_dev, pre_dev)
+                    t7 = time.time()
+                    print('function time: ', t7 - t6)
+ 
+                    # retrieves and shifts transformed array
+                    t8 = time.time()
+                    transformed = self.transformed_dev.get()
+                    t9 = time.time()
+                    print('getting transformed from dev time: ', t9 - t8)
+                    transformed = np.abs(np.fft.fftshift(transformed, axes=-1), dtype = np.float128)
+                    print(type(transformed[0, 0, 0]))
+                    # print(transformed[0, 0, 0, 0])
+
+                    return transformed
+
+                splitList = np.array_split(preTransform, numThreads, axis = 0)
+                result = list(task(splitList[0]))
+                print(len(result))
+
+                for arr in splitList[1:]:
+                    print(list(arr))
+                    result = result + list(arr)
+
+                # result = threadIt(task, numThreads, preTransform)
+
+
             # calculates fft using reikna if pyCuda is found
-            if found:
+            elif self.found:
                 shape = np.shape(preTransform)
                 preTransform = np.complex128(preTransform)
 
