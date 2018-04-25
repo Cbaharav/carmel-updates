@@ -152,7 +152,7 @@ class FFTData(BifrostData):
                         lastAxis = len(shape) - 1
                         fft1 = fft.FFT(preTransform, axes=(lastAxis, ))
                         self.preCompFunc = fft1.compile(self.thr)
-                        self.transformed_dev = self.thr.empty_like(preTransform)
+                        self.transformed_piece_dev = self.thr.empty_like(preTransform)
 
                     t3 = time.time()
                     print('compile time: ', t3 - t2)
@@ -165,31 +165,30 @@ class FFTData(BifrostData):
 
                     # runs compiled function with output arr and input arr
                     t6 = time.time()
-                    self.preCompFunc(self.transformed_dev, pre_dev)
+                    self.preCompFunc(self.transformed_piece_dev, pre_dev)
                     t7 = time.time()
                     print('function time: ', t7 - t6)
  
                     # retrieves and shifts transformed array
                     t8 = time.time()
-                    transformed = self.transformed_dev.get()
+                    transformed_piece = self.transformed_piece_dev.get()
                     t9 = time.time()
                     print('getting transformed from dev time: ', t9 - t8)
-                    transformed = np.abs(np.fft.fftshift(transformed, axes=-1), dtype = np.float128)
-                    print(type(transformed[0, 0, 0]))
-                    # print(transformed[0, 0, 0, 0])
+                    transformed_piece = np.abs(np.fft.fftshift(transformed_piece, axes=-1), dtype = np.float128)
 
-                    return transformed
+                    return transformed_piece
 
                 splitList = np.array_split(preTransform, numThreads, axis = 0)
                 result = list(task(splitList[0]))
                 print(len(result))
 
                 for arr in splitList[1:]:
-                    print(list(arr))
-                    result = result + list(arr)
+                    addOn = task(arr)
+                    addLen = addOn.shape[0]
+                    result = np.concatenate((result, addOn), axis = 0)
 
                 # result = threadIt(task, numThreads, preTransform)
-
+                transformed = result
 
             # calculates fft using reikna if pyCuda is found
             elif self.found:
