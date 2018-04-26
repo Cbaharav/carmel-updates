@@ -33,7 +33,7 @@ The snapshot(s) being read can be defined when creating the object, or set/chang
 Getting Variables & Quantities
 ------------------------------
 
-get_var and get_varTime can be used to read variables as well as to calculate quantities (with a call to _get_quantity). iix, iiy, and iiz can be specified to slice the return array (they can be ints, arrays, or lists). To get variable 'r' at snap 430 with only values at y = 200, z = 5, and z = 7:
+get_var and get_varTime can be used to read variables as well as to calculate quantities (with a call to _get_quantity). iix, iiy, and iiz can be specified to slice the return array (they can be ints, arrays, or lists). If no snapshot is specified, the current snap value will be used (either the initialized one, which is the first in the series, or the most recent snap used in set_snap or in a call to get_var). To get variable 'r' at snap 430 with only values at y = 200, z = 5, and z = 7:
 
 &nbsp;&nbsp;&nbsp; >>> var1 = dd.get_var('r', snap = 430, iiy = 200, iiz = [5, 7])
 
