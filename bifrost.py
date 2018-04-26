@@ -308,7 +308,7 @@ class BifrostData(object):
                               self.dzidzdn.astype(rdt))
 
     def get_varTime(self, var, snap=None, iix=None, iiy=None, iiz=None,
-                    order='F', mode='r', *args, **kwargs):
+                    order='F', mode='r', numThreads = 1, *args, **kwargs):
 
         self.iix = iix
         self.iiy = iiy
@@ -375,14 +375,14 @@ class BifrostData(object):
             if (np.size(self.iix) > 1 or np.size(self.iiy) > 1 or
                     np.size(self.iiz) > 1):
                 axes = [0, -2, -1]
-                helperCall = helper(var)
+                helperCall = helper(var, numThreads)
 
                 for counter, dim in enumerate(['iix', 'iiy', 'iiz']):
                     if getattr(self, dim) != slice(None):
                         helperCall = helperCall.take(
                             getattr(self, dim), axis=axes[counter])
             else:
-                helperCall = helper(var)[self.iix, self.iiy, self.iiz]
+                helperCall = helper(var, numThreads)[self.iix, self.iiy, self.iiz]
 
             value[self.xInd, self.yInd, self.zInd, i] = helperCall
         # self.params = self.paramList
@@ -930,7 +930,7 @@ class BifrostData(object):
                 uperb = self.get_var('uperb')
                 uperbVect = uperb * unitB
 
-                # cross product
+                # cross product (uses cstagger bc no variable gets uperbVect)
                 curlX = cstagger.do(
                     uperbVect[2], 'ddydn') - cstagger.do(uperbVect[1], 'ddzdn')
                 curlY = - \
