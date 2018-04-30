@@ -7,6 +7,7 @@ At this point you may be slightly overwhelmed, confused, excited, or all of the 
 #### Table of Contents
 * [Installations and Setting Up](#installations-and-setting-up)
   * [Anaconda and Jupyter Notebook](#anaconda-and-jupyter-notebook)
+  * [Helita](#helita)
 
 
 ## Installations and Setting Up
@@ -23,7 +24,7 @@ To install:
  jupyter notebook
  ```
 
-**Helita:** </br>
+#### Helita:
 This houses a lot of important stuff, including the almighty bifrost.py and bq_t5_look.py (I may or may not be biased).
 
 To install:
