@@ -87,6 +87,8 @@ setenv CUDA_LIB $BIFROST/CUDA/
 setenv DYLD_LIBRARY_PATH /usr/local/cuda/lib
 
 ```
-* 
+* Enter "csh" into the command line
+* Enter "python" into the command line, and check that the version being used is 3.6, if this is not the case, seek help from a trained professional
+* To leave kyoto and return to your home machine, enter "exit()"
 
 
