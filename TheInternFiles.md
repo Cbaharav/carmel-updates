@@ -51,3 +51,13 @@ from . import lp
 ```
 setenv HELITA "~/helita-master/helita"
 ```
+* To update helita later on, cd into the helita directory and use "git pull"
+* If this does not work, you may have to do a hard pull to override all of your local changes. **WARNING:** *Do this only if you are aware that you will be losing ALL of your changes to every file within helita and if you have copies of changes you want to save elsewhere!!!*
+```
+cd helita
+git fetch origin master
+git reset --hard FETCH_HEAD
+```
+
+### Kyoto:
+
