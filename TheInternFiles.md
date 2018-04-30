@@ -8,6 +8,7 @@ At this point you may be slightly overwhelmed, confused, excited, or all of the 
 * [Installations and Setting Up](#installations-and-setting-up)
   * [Anaconda and Jupyter Notebook](#anaconda-and-jupyter-notebook)
   * [Helita](#helita)
+  * [Kyoto](#kyoto)
 
 
 ## Installations and Setting Up
@@ -19,10 +20,7 @@ Jupyter Notebook is a very useful, commonly used application in which you can ea
 
 To install:
 * Download the Python 3.6 version (can also download 2.7 version if necessary) of the Graphical Installer from this website: https://www.continuum.io/downloads
-* Launch Jupyter Notebook from terminal:
- ```
- jupyter notebook
- ```
+* Launch Jupyter Notebook from terminal by typing "jupyter notebook"
 
 #### Helita:
 This houses a lot of important stuff, including the almighty bifrost.py and bq_t5_look.py (I may or may not be biased).
@@ -59,5 +57,36 @@ git fetch origin master
 git reset --hard FETCH_HEAD
 ```
 
-### Kyoto:
+#### Kyoto:
+This is a server which you have access to, and which has a graphics card. This is useful for running code that has several threads running in parallel (your machine can't handle that).
+
+To login to kyoto:
+* In Terminal, type "ssh -y kyoto"
+* When prompted for a password, enter the password that allows you to log on to your computer
+
+To install Anaconda in kyoto:
+* Copy the file from /sanhome/juanms to your Kyoto home directory
+```
+cp /sanhome/juanmsAnaconda3-4.4.0-Linux-x86_64.sh
+```
+* Then run:
+```
+bash Anaconda3-4.4.0-Linux-x86_64.sh 
+```
+* **I don’t remember how I opened a .cshrc file in kyoto, permission currently denied**
+* Inside the .cshrc file in kyoto, copy these lines **(the first line is missing a /usr/bin somewhere, but I'm not sure where because I can't see my .cshrc file)**:
+```
+setenv PATH ~/anaconda3/bin:/usr/bin:~/bin/:/usr/local/bin:/usr/local/cuda/bin:/usr/texbin/:$PATH
+setenv http_proxy http://proxy-ics.external.lmco.com:80
+setenv https_proxy http://proxy-ics.external.lmco.com:80
+setenv ALL_PROXY http://proxy-ics.external.lmco.com:80
+#CUDA: 
+setenv PATH /usr/local/cuda7-5/bin:$PATH
+setenv LD_LIBRARY_PATH /usr/local/cuda-7.5/lib64 
+setenv CUDA_LIB $BIFROST/CUDA/
+setenv DYLD_LIBRARY_PATH /usr/local/cuda/lib
+
+```
+* 
+
 
