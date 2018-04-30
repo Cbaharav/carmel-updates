@@ -29,6 +29,8 @@ To install:
 * Using Terminal, clone the latest version of helita from Juan's branch on Github:
  ```
  git clone https://github.com/jumasy/helita.git
+ cd helita
+ python setup.py install
  ```
 * Open helita/helita/io/`__init__`.py (either through Terminal with the "open" command, or by manually opening the file through finder if you are new to Terminal), and change it to read:
  ``` python
@@ -43,3 +45,7 @@ from . import crispex
 from . import lp
 # from . import ncdf
  ```
+* Open .cshrc (by typing ".cshrc" in Terminal) and add a path for helita:
+   ```
+  setenv HELITA "~/helita-master/helita"
+  ```
