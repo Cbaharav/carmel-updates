@@ -25,9 +25,10 @@ BifrostData Objects
 
 bifrost.py uses BifrostData objects. This Bifrost Data object reads snapshot 430 from simulation 'cb10f' from directory '/net/opal/Volumes/Amnesia/mpi3drun/Granflux':
 
-&nbsp;&nbsp;&nbsp; >>> from helita.sim import bifrost as br <br />
-&nbsp;&nbsp;&nbsp; >>> dd = br.BifrostData('cb10f', snap = 430, fdir = '/net/opal/Volumes/Amnesia/mpi3drun/Granflux')
-
+```python
+from helita.sim import bifrost as br
+dd = br.BifrostData('cb10f', snap = 430, fdir = '/net/opal/Volumes/Amnesia/mpi3drun/Granflux')
+```
 The snapshot(s) being read can be defined when creating the object, or set/changed anytime later. Snaps can be ints, arrays, or lists. 
 
 Getting Variables & Quantities
