@@ -46,6 +46,6 @@ from . import lp
 # from . import ncdf
  ```
 * Open .cshrc (by typing ".cshrc" in Terminal) and add a path for helita:
-   ```
-  setenv HELITA "~/helita-master/helita"
-  ```
+```
+setenv HELITA "~/helita-master/helita"
+```
