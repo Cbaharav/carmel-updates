@@ -5,10 +5,10 @@ Welcome to The Intern Files! Congratulations on getting the Lockheed Internship.
 At this point you may be slightly overwhelmed, confused, excited, or all of the above. This is meant to hopefully help in getting you started, and can be updated for future generations of interns.
 
 #### Table of Contents
-* [Installations](#installations)
+* [Installations and Setting Up](#installations-and-setting-up)
 
 
-## Installations
+## Installations and Setting Up
 
 Setting up software, paths, environments, etc. is inherently a fairly time-consuming and frustrating process. Good luck!
 
