@@ -15,6 +15,7 @@ At this point you may be slightly overwhelmed, confused, excited, or all of the 
 
 Setting up software, paths, environments, etc. is inherently a fairly time-consuming and frustrating process. Good luck!
 
+---
 #### Anaconda and Jupyter Notebook:
 Jupyter Notebook is a very useful, commonly used application in which you can easily run your code (especially useful for plotting and images). You will likely use it frequently in the beginning of your internship and later on as a good starting place for new ideas.
 
@@ -22,6 +23,7 @@ To install:
 * Download the Python 3.6 version (can also download 2.7 version if necessary) of the Graphical Installer from this website: https://www.continuum.io/downloads
 * Launch Jupyter Notebook from terminal by typing "jupyter notebook"
 
+---
 #### Helita:
 This houses a lot of important stuff, including the almighty bifrost.py and bq_t5_look.py (I may or may not be biased).
 
@@ -56,7 +58,7 @@ cd helita
 git fetch origin master
 git reset --hard FETCH_HEAD
 ```
-
+---
 #### Kyoto:
 This is a server which you have access to, and which has a graphics card. This is useful for running code that has several threads running in parallel (your machine can't handle that).
 
