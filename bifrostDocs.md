@@ -12,13 +12,17 @@ bifrost.py is part of the helita library. Helita documentation can be found here
 
 To install helita:
 
-  &nbsp;&nbsp;&nbsp; git clone https://github.com/ITA-solar/helita.git <br />
-  &nbsp;&nbsp;&nbsp; cd helita <br />
-  &nbsp;&nbsp;&nbsp; python setup.py install
+  ```
+  git clone https://github.com/ITA-solar/helita.git
+  cd helita
+  python setup.py install
+  ```
 
 In .cshrc add a path for helita: <br />
 
-  &nbsp;&nbsp;&nbsp; setenv HELITA "~/helita-master/helita"
+  ```
+  setenv HELITA "~/helita-master/helita"
+  ```
 
 BifrostData Objects
 -------------------
