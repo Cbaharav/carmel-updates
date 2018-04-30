@@ -9,6 +9,13 @@ At this point you may be slightly overwhelmed, confused, excited, or all of the 
   * [Anaconda and Jupyter Notebook](#anaconda-and-jupyter-notebook)
   * [Helita](#helita)
   * [Kyoto](#kyoto)
+  * Pycuda
+  * Sublime
+* Stuff to Know
+  * Basic Unix (Terminal)
+  * Python
+  * Numpy (& Matplotlib)
+* More to come...
 
 
 ## Installations and Setting Up
