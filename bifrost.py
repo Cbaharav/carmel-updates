@@ -923,6 +923,7 @@ class BifrostData(object):
             bz = self.get_var('bzc')
             bMag = np.sqrt(bx**2 + by**2 + bz**2)
             bx, by, bz = bx / bMag, by / bMag, bz / bMag
+            #b is already centered
 
             unitB = np.stack((bx, by, bz))
 
@@ -933,33 +934,37 @@ class BifrostData(object):
                 # cross product (uses cstagger bc no variable gets uperbVect)
                 curlX = cstagger.do(
                     uperbVect[2], 'ddydn') - cstagger.do(uperbVect[1], 'ddzdn')
+                curlX = cstagger.do(cstagger.do(curlX, 'yup'), 'zup')
                 curlY = - \
                     cstagger.do(uperbVect[2], 'ddxdn') + \
                     cstagger.do(uperbVect[0], 'ddzdn')
+                curlY = cstagger.do(cstagger.do(curlY, 'xup'), 'zup')
                 curlZ = cstagger.do(
                     uperbVect[1], 'ddxdn') - cstagger.do(uperbVect[0], 'ddydn')
+                curlZ = cstagger.do(cstagger.do(curlZ, 'xup'), 'yup')
                 curl = np.stack((curlX, curlY, curlZ))
 
                 # dot product
-                result = (unitB * curl).sum(0)
+                result = np.abs((unitB * curl).sum(0))
 
             elif quant == 'fast':
                 uperb = self.get_var('uperb')
                 uperbVect = uperb * unitB
 
-                result = cstagger.do(uperbVect[0], 'ddxdn') + cstagger.do(
-                    uperbVect[1], 'ddydn') + cstagger.do(uperbVect[2], 'ddzdn')
+                result = np.abs(cstagger.do(uperbVect[0], 'ddxdn') + cstagger.do(
+                    uperbVect[1], 'ddydn') + cstagger.do(uperbVect[2], 'ddzdn'))
 
             else:
                 ux = self.get_var('uxc')
                 uy = self.get_var('uyc')
                 uz = self.get_var('uzc')
+                #u is centered
 
                 dot1 = ux*bx + uy*by + uz*bz
                 grad = np.stack((cstagger.do(dot1, 'ddxdn'), cstagger.do(
                     dot1, 'ddydn'), cstagger.do(dot1, 'ddzdn')))
 
-                result = (unitB * grad).sum(0)
+                result = np.abs((unitB * grad).sum(0))
 
             return result
 
