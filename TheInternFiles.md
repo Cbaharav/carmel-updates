@@ -130,7 +130,7 @@ Pro tip: I was going to suggest changing the color theme to suit your eyes bette
 ## Stuff to Know
 Please change this title if you think of a better one. This section includes languages and applications that you should probably get to know, because they'll be pretty helpful. I'll try to attach cheat sheets and highlight the important points of each one.
 
-#### Basic Unix (Terminal)
+#### Basic Unix (Terminal):
 Maybe you are more prepared than I was, and you already know how to navigate unix commands like a pro. If so, good for you! If all you've seen is a cool wizard-like person quickly navigating through the computer and you have no idea what this sorcery is, don't worry-- that was me.
 
 Here is a pretty standard cheat sheet: http://cheatsheetworld.com/programming/unix-linux-cheat-sheet/
