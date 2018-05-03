@@ -10,7 +10,7 @@ At this point you may be slightly overwhelmed, confused, excited, or all of the 
   * [Helita](#helita)
   * [Kyoto](#kyoto)
   * [Pycuda](#pycuda)
-  * Sublime
+  * [Sublime](#sublime)
 * Stuff to Know
   * Basic Unix (Terminal)
   * Python
@@ -118,5 +118,29 @@ cp /sanhome/juanms/pycuda-2017.1.tar.gz ~
 make
 make install
 ```
+---
+
+#### Sublime:
+This is a fairly standard text editor that I like, feel free to install a different one if you have a preference. You can download it from their website: https://www.sublimetext.com
+
+Pro tip: I was going to suggest changing the color theme to suit your eyes better, but as I was trying to figure out how I changed the preference, I accidentally changed the theme and now I can't find the one I liked. So don't do that.
+
+---
+
+## Stuff to Know
+Please change this title if you think of a better one. This section includes languages and applications that you should probably get to know, because they'll be pretty helpful. I'll try to attach cheat sheets and highlight the important points of each one.
+
+#### Basic Unix (Terminal)
+Maybe you are more prepared than I was, and you already know how to navigate unix commands like a pro. If so, good for you! If all you've seen is a cool wizard-like person quickly navigating through the computer and you have no idea what this sorcery is, don't worry-- that was me.
+
+Here is a pretty standard cheat sheet: http://cheatsheetworld.com/programming/unix-linux-cheat-sheet/
+
+The commands you'll use frequently: cd, open, python (if you want to run a file with python), and maybe ls & pwd if you get lost a lot (no shame).
+
+Another useful part of terminal is iPython! Type in "ipython" to get an exciting python interface to test some of your code (like if you're working with bifrost.py).
+
+
+
+
 
 
