@@ -9,7 +9,7 @@ At this point you may be slightly overwhelmed, confused, excited, or all of the 
   * [Anaconda and Jupyter Notebook](#anaconda-and-jupyter-notebook)
   * [Helita](#helita)
   * [Kyoto](#kyoto)
-  * Pycuda
+  * [Pycuda](#pycuda)
   * Sublime
 * Stuff to Know
   * Basic Unix (Terminal)
@@ -99,5 +99,24 @@ setenv DYLD_LIBRARY_PATH /usr/local/cuda/lib
 * Enter "csh" into the command line
 * Enter "python" into the command line, and check that the version being used is 3.6, if this is not the case, seek help from a trained professional
 * To leave kyoto and return to your home machine, enter "exit()"
+
+---
+
+#### PyCuda:
+This is a python wrapper for cuda, and it is useful for parallelization (breaking up big tasks into smaller ones that are run simultaneously, and therefore finish faster than if the calculation was run linearly). It can only be run on a GPU (like the one that Kyoto has).
+
+To install:
+* Make sure you are in kyoto (if not, see [Kyoto](#kyoto) for log-in instructions)
+* Copy the file pycuda-2017.1.tar.gz from sanhome into your kyoto home directory:
+```
+cp /sanhome/juanms/pycuda-2017.1.tar.gz ~
+```
+* Uncompress the folder by typing: tar xfz pycuda-2017.1.tar.gz
+* Then, following the instructions in the README_SETUP file, type:
+```
+./configure.py
+make
+make install
+```
 
 
