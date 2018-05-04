@@ -925,6 +925,7 @@ class BifrostData(object):
             bx, by, bz = bx / bMag, by / bMag, bz / bMag
             #b is already centered
 
+            # unit vector of b
             unitB = np.stack((bx, by, bz))
 
             if quant == 'alf':
@@ -932,16 +933,14 @@ class BifrostData(object):
                 uperbVect = uperb * unitB
 
                 # cross product (uses cstagger bc no variable gets uperbVect)
-                curlX = cstagger.do(
-                    uperbVect[2], 'ddydn') - cstagger.do(uperbVect[1], 'ddzdn')
-                curlX = cstagger.do(cstagger.do(curlX, 'yup'), 'zup')
+                curlX = cstagger.do(cstagger.do(
+                    uperbVect[2], 'ddydn'), 'yup') - cstagger.do(cstagger.do(uperbVect[1], 'ddzdn'), 'zup')  
                 curlY = - \
-                    cstagger.do(uperbVect[2], 'ddxdn') + \
-                    cstagger.do(uperbVect[0], 'ddzdn')
-                curlY = cstagger.do(cstagger.do(curlY, 'xup'), 'zup')
-                curlZ = cstagger.do(
-                    uperbVect[1], 'ddxdn') - cstagger.do(uperbVect[0], 'ddydn')
-                curlZ = cstagger.do(cstagger.do(curlZ, 'xup'), 'yup')
+                    cstagger.do(cstagger.do(uperbVect[2], 'ddxdn'), 'xup') + \
+                    cstagger.do(cstagger.do(uperbVect[0], 'ddzdn'), 'zup')
+                curlZ = cstagger.do(cstagger.do(
+                    uperbVect[1], 'ddxdn'), 'xup') - cstagger.do(cstagger.do(uperbVect[0], 'ddydn'), 'yup')
+
                 curl = np.stack((curlX, curlY, curlZ))
 
                 # dot product
@@ -950,24 +949,27 @@ class BifrostData(object):
             elif quant == 'fast':
                 uperb = self.get_var('uperb')
                 uperbVect = uperb * unitB
+                # print(np.shape(uperbVect))
 
-                result = np.abs(cstagger.do(uperbVect[0], 'ddxdn') + cstagger.do(
-                    uperbVect[1], 'ddydn') + cstagger.do(uperbVect[2], 'ddzdn'))
+                uperbVect = np.ones((3, 512, 512, 544))
+
+                result = np.abs(cstagger.do(cstagger.do(uperbVect[0], 'ddxdn'), 'xup') + cstagger.do(cstagger.do(
+                    uperbVect[1], 'ddydn'), 'yup') + cstagger.do(cstagger.do(uperbVect[2], 'ddzdn'), 'zup'))
 
             else:
-                ux = self.get_var('uxc')
-                uy = self.get_var('uyc')
-                uz = self.get_var('uzc')
-                #u is centered
+                # ux = self.get_var('uxc')
+                # uy = self.get_var('uyc')
+                # uz = self.get_var('uzc')
+                # #u is centered
 
-                dot1 = ux*bx + uy*by + uz*bz
-                grad = np.stack((cstagger.do(dot1, 'ddxdn'), cstagger.do(
-                    dot1, 'ddydn'), cstagger.do(dot1, 'ddzdn')))
+                # dot1 = ux*bx + uy*by + uz*bz
+                dot1 = self.get_var('uparb')
+                grad = np.stack((cstagger.do(cstagger.do(dot1, 'ddxdn'), 'xup'), cstagger.do(cstagger.do(
+                    dot1, 'ddydn'), 'yup'), cstagger.do(cstagger.do(dot1, 'ddzdn'), 'zup')))
 
                 result = np.abs((unitB * grad).sum(0))
 
             return result
-
         else:
             raise ValueError(('get_quantity: do not know (yet) how to '
                               'calculate quantity %s. Note that simple_var '
