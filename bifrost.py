@@ -308,7 +308,7 @@ class BifrostData(object):
                               self.dzidzdn.astype(rdt))
 
     def get_varTime(self, var, snap=None, iix=None, iiy=None, iiz=None,
-                    order='F', mode='r', numThreads = 1, *args, **kwargs):
+                    order='F', mode='r', numThreads=1, *args, **kwargs):
 
         self.iix = iix
         self.iiy = iiy
@@ -382,7 +382,8 @@ class BifrostData(object):
                         helperCall = helperCall.take(
                             getattr(self, dim), axis=axes[counter])
             else:
-                helperCall = helper(var, numThreads)[self.iix, self.iiy, self.iiz]
+                helperCall = helper(var, numThreads)[
+                    self.iix, self.iiy, self.iiz]
 
             value[self.xInd, self.yInd, self.zInd, i] = helperCall
         # self.params = self.paramList
@@ -923,7 +924,7 @@ class BifrostData(object):
             bz = self.get_var('bzc')
             bMag = np.sqrt(bx**2 + by**2 + bz**2)
             bx, by, bz = bx / bMag, by / bMag, bz / bMag
-            #b is already centered
+            # b is already centered
 
             # unit vector of b
             unitB = np.stack((bx, by, bz))
@@ -934,12 +935,14 @@ class BifrostData(object):
 
                 # cross product (uses cstagger bc no variable gets uperbVect)
                 curlX = cstagger.do(cstagger.do(
-                    uperbVect[2], 'ddydn'), 'yup') - cstagger.do(cstagger.do(uperbVect[1], 'ddzdn'), 'zup')  
+                    uperbVect[2], 'ddydn'), 'yup') - cstagger.do(
+                    cstagger.do(uperbVect[1], 'ddzdn'), 'zup')
                 curlY = - \
                     cstagger.do(cstagger.do(uperbVect[2], 'ddxdn'), 'xup') + \
                     cstagger.do(cstagger.do(uperbVect[0], 'ddzdn'), 'zup')
                 curlZ = cstagger.do(cstagger.do(
-                    uperbVect[1], 'ddxdn'), 'xup') - cstagger.do(cstagger.do(uperbVect[0], 'ddydn'), 'yup')
+                    uperbVect[1], 'ddxdn'), 'xup') - cstagger.do(
+                    cstagger.do(uperbVect[0], 'ddydn'), 'yup')
 
                 curl = np.stack((curlX, curlY, curlZ))
 
@@ -949,12 +952,12 @@ class BifrostData(object):
             elif quant == 'fast':
                 uperb = self.get_var('uperb')
                 uperbVect = uperb * unitB
-                # print(np.shape(uperbVect))
 
-                uperbVect = np.ones((3, 512, 512, 544))
-
-                result = np.abs(cstagger.do(cstagger.do(uperbVect[0], 'ddxdn'), 'xup') + cstagger.do(cstagger.do(
-                    uperbVect[1], 'ddydn'), 'yup') + cstagger.do(cstagger.do(uperbVect[2], 'ddzdn'), 'zup'))
+                print(np.shape(uperbVect))
+                result = np.abs(cstagger.do(cstagger.do(
+                    uperbVect[0], 'ddxdn'), 'xup') + cstagger.do(cstagger.do(
+                        uperbVect[1], 'ddydn'), 'yup') + cstagger.do(
+                            cstagger.do(uperbVect[2], 'ddzdn'), 'zup'))
 
             else:
                 # ux = self.get_var('uxc')
@@ -964,12 +967,16 @@ class BifrostData(object):
 
                 # dot1 = ux*bx + uy*by + uz*bz
                 dot1 = self.get_var('uparb')
-                grad = np.stack((cstagger.do(cstagger.do(dot1, 'ddxdn'), 'xup'), cstagger.do(cstagger.do(
-                    dot1, 'ddydn'), 'yup'), cstagger.do(cstagger.do(dot1, 'ddzdn'), 'zup')))
+                grad = np.stack((cstagger.do(cstagger.do(dot1, 'ddxdn'),
+                                             'xup'), cstagger.do(cstagger.do(
+                                                 dot1, 'ddydn'), 'yup'),
+                                 cstagger.do(cstagger.do(dot1, 'ddzdn'),
+                                             'zup')))
 
                 result = np.abs((unitB * grad).sum(0))
 
             return result
+
         else:
             raise ValueError(('get_quantity: do not know (yet) how to '
                               'calculate quantity %s. Note that simple_var '
