@@ -11,8 +11,8 @@ At this point you may be slightly overwhelmed, confused, excited, or all of the 
   * [Kyoto](#kyoto)
   * [Pycuda](#pycuda)
   * [Sublime](#sublime)
-* Stuff to Know
-  * Basic Unix (Terminal)
+* [Stuff to Know](#stuff-to-know)
+  * [Basic Unix](#basic-unix)
   * Python
   * Numpy (& Matplotlib)
 * More to come...
@@ -130,7 +130,9 @@ Pro tip: I was going to suggest changing the color theme to suit your eyes bette
 ## Stuff to Know
 Please change this title if you think of a better one. This section includes languages and applications that you should probably get to know, because they'll be pretty helpful. I'll try to attach cheat sheets and highlight the important points of each one.
 
-#### Basic Unix (Terminal):
+---
+
+#### Basic Unix:
 Maybe you are more prepared than I was, and you already know how to navigate unix commands like a pro. If so, good for you! If all you've seen is a cool wizard-like person quickly navigating through the computer and you have no idea what this sorcery is, don't worry-- that was me.
 
 Here is a pretty standard cheat sheet: http://cheatsheetworld.com/programming/unix-linux-cheat-sheet/
@@ -138,6 +140,10 @@ Here is a pretty standard cheat sheet: http://cheatsheetworld.com/programming/un
 The commands you'll use frequently: cd, open, python (if you want to run a file with python), and maybe ls & pwd if you get lost a lot (no shame).
 
 Another useful part of terminal is iPython! Type in "ipython" to get an exciting python interface to test some of your code (like if you're working with bifrost.py).
+
+---
+
+#### Python:
 
 
 
