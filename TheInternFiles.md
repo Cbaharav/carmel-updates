@@ -123,7 +123,7 @@ make install
 #### Sublime:
 This is a fairly standard text editor that I like, feel free to install a different one if you have a preference. You can download it from their website: https://www.sublimetext.com
 
-Pro tip: I was going to suggest changing the color theme to suit your eyes better, but as I was trying to figure out how I changed the preference, I accidentally changed the theme and now I can't find the one I liked. So don't do that.
+Pro tip: I was going to suggest changing the color theme to limit the strain on your eyes, but as I was trying to figure out how I changed the preference, I accidentally changed the theme and now I can't find the one I liked. So don't do that.
 
 ---
 
@@ -145,6 +145,8 @@ Another useful part of terminal is iPython! Type in "ipython" to get an exciting
 
 #### Python:
 
+Good course for the basics (feel free to skip around): https://www.edx.org/course/python-data-science-uc-san-diegox-dse200x
+This is the cheat sheet I made based off of the course, **figure out how to attach file**: http://localhost:8888/notebooks/AnacondaProjects/Python%20Basics.ipynb
 
 
 
