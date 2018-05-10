@@ -2,10 +2,10 @@
   [x] bla
 
  List files:
-    [] Create a folder with obsolete files and moves those there.
+    [x] Create a folder with obsolete files and moves those there.
 
  TEST:
-    [] Create a TESTS folder.
+    [x] Create a TESTS folder.
       [] Add scripts that shows the tests.
 
  Style:
@@ -20,13 +20,13 @@
 
         BIFROST.md:
           [] Add description of other flags in python setup.py install, e.g., --developer ...
-          [] setenv HELITA "~/helita-master/helita" is not needed.
+          [x] setenv HELITA "~/helita-master/helita" is not needed.
           [] BifrostData Objects -> BifrostData class, change
               in the document each time that you mention BifrostData Objects it
               should be BifrostData class.
-          [] bifrost.py uses BifrostData objects -> bifrost.py includes
+          [x] bifrost.py uses BifrostData objects -> bifrost.py includes
              BifrostData class (as well as others?)
-          [] This Bifrost Data object reads -> The following allows to create the
+          [x] This Bifrost Data object reads -> The following allows to create the
              class for snapshot number 430 from  ...
           [] Consider to use (https://www.lmsal.com/iris_science/doc?cmd=dcur&proj_num=IS0124&file_type=pdf)
              for guidance of what could be included so you
