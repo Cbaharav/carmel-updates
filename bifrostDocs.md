@@ -18,16 +18,10 @@ To install helita:
   python setup.py install
   ```
 
-In .cshrc add a path for helita: <br />
-
-  ```
-  setenv HELITA "~/helita-master/helita"
-  ```
-
-BifrostData Objects
+BifrostData Class
 -------------------
 
-bifrost.py uses BifrostData objects. This Bifrost Data object reads snapshot 430 from simulation 'cb10f' from directory '/net/opal/Volumes/Amnesia/mpi3drun/Granflux':
+bifrost.py includes the BifrostData class (among others). The following allows to create the class for snapshot number 430 from simulation 'cb10f' from directory '/net/opal/Volumes/Amnesia/mpi3drun/Granflux':
 
 ```python
 from helita.sim import bifrost as br
