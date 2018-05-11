@@ -35,11 +35,13 @@ class FFTData(BifrostData):
         """
         sets all stored vars to None
         """
+        # set in singleCudaRun
         self.preCompFunc = None
         self.preCompShape = None
         self.transformed_dev = None
         self.api = None
         self.thr = None
+        # whether program has access to pycuda
         self.found = found
         self.verbose = verbose
 
@@ -64,11 +66,14 @@ class FFTData(BifrostData):
         if self.api is None:
             if self.verbose:
                 print('api is None')
+            # combination of pycuda & pyopencl
             self.api = cluda.cuda_api()
+            # new thread on device
             self.thr = self.api.Thread.create()
 
-        # creates new computation & recompiles if new input shape
-        # if same as previous input shape, uses the stored function
+        # creates new computation (preCompFunc- pre-compiled function) & re-
+        # compiles if new input has different shape than old (preCompShape);
+        # if new shape equals previous input shape, uses the stored function
         if not self.preCompShape == shape:
             if self.verbose:
                 print('shape is new')
@@ -76,6 +81,7 @@ class FFTData(BifrostData):
             lastAxis = len(shape) - 1
             fft1 = fft.FFT(preTransform, axes=(lastAxis, ))
             self.preCompFunc = fft1.compile(self.thr)
+            # new empty array with same shape as preTransform on device
             self.transformed_piece_dev = self.thr.empty_like(preTransform)
 
         # sends preTransform array to device
@@ -96,6 +102,7 @@ class FFTData(BifrostData):
             print('sending pre to dev time: ', t4 - t3)
             print('function time: ', t5 - t4)
             print('getting transformed from dev time: ', t6 - t5)
+
         transformed_piece = np.abs(np.fft.fftshift(
             transformed_piece, axes=-1), dtype=np.float128)
 
@@ -187,18 +194,12 @@ class FFTData(BifrostData):
         else:
             # threading
             if numThreads > 1:
-                def task(arr):
-                    transformed_piece = np.abs(np.fft.fftshift(
-                        (np.fft.fft(arr)), axes=-1))
-                    return transformed_piece
-
-                transformed = threadTask(task, numThreads, self.preTransform)
+                transformed = threadTask(
+                    singleRun, numThreads, self.preTransform)
 
             # single thread
             else:
-                # uses np fft if no pyCuda found
-                transformed = np.abs(np.fft.fftshift(
-                    (np.fft.fft(self.preTransform)), axes=-1))
+                transformed = singleRun(self.preTransform)
 
         # returns dictionary of frequency & output cube
         output = {'freq': self.freq, 'ftCube': transformed}
@@ -206,6 +207,11 @@ class FFTData(BifrostData):
         if self.verbose:
             print('total time: ', t1-t0)
         return output
+
+
+def singleRun(arr):
+    transformed_piece = np.abs(np.fft.fftshift((np.fft.fft(arr)), axes=-1))
+    return transformed_piece
 
 
 def threadTask(task, numThreads, *args):
