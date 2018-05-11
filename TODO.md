@@ -73,13 +73,9 @@
        Suggestion: 
 
 	    def run_gpu(self, choice=True):
-
 	    	'''
-
 		activates the module that uses CUDA
-
 		'''
-
       	    	self.use_gpu = choice
 
 	If you do so, make sure that you change line 117 accordingly. 
@@ -89,7 +85,6 @@
 	True, then does the prints, i.e., 
 
 	      if verbose: 
-
 	      	 print(... 
 	      
 
