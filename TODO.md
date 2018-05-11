@@ -76,7 +76,7 @@
 	    	'''
 		activates the module that uses CUDA
 		'''
-      	    	self.use_gpu = choice
+		self.use_gpu = choice
 
 	If you do so, make sure that you change line 117 accordingly. 
 
