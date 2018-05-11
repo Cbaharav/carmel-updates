@@ -16,7 +16,7 @@
 
 ## Style:
 
-    [] Make sure that you fullfil pep8 (I dobout that lines 61, 133, 134, 141, 163
+    [x] Make sure that you fullfil pep8 (I dobout that lines 61, 133, 134, 141, 163
        are within pep8 rules). 
     
 
