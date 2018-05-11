@@ -57,19 +57,19 @@
 
     [x] Layout looks nice!
 
-    [] Reduce some empty space (leave at most one empty line). In addition, dont leave
-       the empty line between the description below each function.
+    [x] Reduce some empty space (leave at most one empty line). In addition, dont leave
+       the empty line between the description below each function. **reduced as much as possible, some required by pep8**
 
-    [] Add a very short # comment for relevant variables in the code, e.g.,
+    [x] Add a very short # comment for relevant variables in the code, e.g.,
        self.preCompFunc, self.preCompShape, self.transformed_dev, self.api,
        self.thr, self.found
 
-    [] Is there any special reason fftHelper, threadIt, task, are functions of another
+    [x] Is there any special reason fftHelper, threadIt, task, are functions of another
        function?. If possible, take it out from get_fft as independent functions.
        They could be out of the class, towards the end of the file if you like.
        It would be nice if you make a more meaning full name of all these three functions.
 
-    [] use_gpu rewrites found. I though found is a flag if the machina has GPUs and CUDA. 
+    [x] use_gpu rewrites found. I though found is a flag if the machina has GPUs and CUDA. 
        Suggestion: 
 
 	    def run_gpu(self, choice=True):
@@ -80,7 +80,7 @@
 
 	If you do so, make sure that you change line 117 accordingly. 
 
-     [] I see several prints. This might be useful but sometimes is anyoing to see
+     [x] I see several prints. This might be useful but sometimes is anyoing to see
      	every time these prints. Alternative. Add a flag in __init__ (verbose) if this one is 
 	True, then does the prints, i.e., 
 
