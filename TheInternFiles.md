@@ -32,7 +32,7 @@ To install:
 
 ---
 #### Helita:
-This houses a lot of important stuff, including the almighty bifrost.py and bq_t5_look.py (I may or may not be biased).
+This contains several important files, including the almighty bifrost.py and bq_t5_look.py (I may or may not be biased).
 
 To install:
 * Using Terminal, clone the latest version of helita from Juan's branch on Github:
@@ -54,10 +54,6 @@ from . import crispex
 from . import lp
 # from . import ncdf
  ```
-* Open .cshrc (by typing ".cshrc" in Terminal) and add a path for helita:
-```
-setenv HELITA "~/helita-master/helita"
-```
 * To update helita later on, cd into the helita directory and use "git pull"
 * If this does not work, you may have to do a hard pull to override all of your local changes. **WARNING:** *Do this only if you are aware that you will be losing ALL of your changes to every file within helita and if you have copies of changes you want to save elsewhere!!!*
 ```
@@ -146,6 +142,7 @@ Another useful part of terminal is iPython! Type in "ipython" to get an exciting
 #### Python:
 
 Good course for the basics (feel free to skip around): https://www.edx.org/course/python-data-science-uc-san-diegox-dse200x
+
 This is the cheat sheet I made based off of the course, **figure out how to attach file**: http://localhost:8888/notebooks/AnacondaProjects/Python%20Basics.ipynb
 
 
