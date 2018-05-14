@@ -63,7 +63,7 @@ git reset --hard FETCH_HEAD
 ```
 ---
 #### Kyoto:
-This is a server which you have access to, and which has a graphics card. This is useful for running code that has several threads running in parallel (your machine can't handle that).
+This is a server which you have access to (other servers include Kona, Yale, Karmeliet, and Thor), and which has a graphics card. This is useful for running code that has several threads running in parallel (your machine can't handle that).
 
 To login to kyoto:
 * In Terminal, type "ssh -y kyoto"
