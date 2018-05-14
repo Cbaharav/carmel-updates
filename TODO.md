@@ -24,17 +24,17 @@
 
     [] Fill README.md with information related to this library.
 
-    [] Consider use github wiki for a more complete documentation
+    [x] Consider use github wiki for a more complete documentation
       (at least for the bifrost.md). This can be found here
       (https://github.com/Cbaharav/carmel-updates/wiki). This will allow
       various sections. You may want to add some of information in the
       poster you did for the AGU meeting. 
 
-        # BIFROST.md:
+        # BIFROST.md **moved the content to the wiki and the original file to obsoleteFiles**:
 
-          [] Add description of other flags in python setup.py install, e.g., --developer ...
+          [x] Add description of other flags in python setup.py install, e.g., --developer ...
 
-          [] BifrostData Objects -> BifrostData class, change
+          [x] BifrostData Objects -> BifrostData class, change
               in the document each time that you mention BifrostData Objects it
               should be BifrostData class.
 
@@ -90,6 +90,6 @@
 
 ## Bifrost.py
 
-    [] Did you merged your bifrost.py with the one in Helita? If so, delete the one here. 
+    [x] Did you merged your bifrost.py with the one in Helita? If so, delete the one here. 
 
     [] You may want to move bifrostdoc.md into my helita fork. Or even better, in the helita wiki. 
