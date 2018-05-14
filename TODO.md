@@ -44,13 +44,13 @@
 
         # TheInternFiles.md: (I also took the liberty to comment on this ;-D)
 
-          [] typo: houses -> uses
+          [x] typo: houses -> uses
 
-          [] stuff: be more specific if you can.
+          [x] stuff: be more specific if you can.
 
-          [] setenv HELITA "~/helita-master/helita" is not needed
+          [x] setenv HELITA "~/helita-master/helita" is not needed
 
-          [] You may want to list other servers: Kyoto, Kona, Yale, Karmeliet,
+          [x] You may want to list other servers: Kyoto, Kona, Yale, Karmeliet,
                Thor 
 
 ## New code:
