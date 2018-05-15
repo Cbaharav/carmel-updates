@@ -14,11 +14,14 @@
       	 the test that you are doing for the various waves where the 
 	 result must be 1 or 0. 
 
+      [] Add real test, i.e., from one simulation that shows a map of height, i.e., z axis vs 
+      frequency where you do average of the FFT in x and y. This might be included as a new
+      function (without the plot.imshow()) in the code. 
+
 ## Style:
 
     [x] Make sure that you fullfil pep8 (I dobout that lines 61, 133, 134, 141, 163
        are within pep8 rules). 
-    
 
 ## Documentation:
 
@@ -30,28 +33,21 @@
       various sections. You may want to add some of information in the
       poster you did for the AGU meeting. 
 
-        # BIFROST.md **moved the content to the wiki and the original file to obsoleteFiles**:
-
-          [x] Add description of other flags in python setup.py install, e.g., --developer ...
-
-          [x] BifrostData Objects -> BifrostData class, change
-              in the document each time that you mention BifrostData Objects it
-              should be BifrostData class.
+        #  wiki 
+	  [x] Great first step! you are fast... 
 
           [] Consider to use (https://www.lmsal.com/iris_science/doc?cmd=dcur&proj_num=IS0124&file_type=pdf)
              for guidance of what could be included so you
              know which other information you could add.
+	     	 [] Add new page about bifrost.py, i.e., things that one could do with import helita.sim.bifrost as br. 
 
         # TheInternFiles.md: (I also took the liberty to comment on this ;-D)
 
-          [x] typo: houses -> uses
+          [] Add description of other flags in python setup.py install, e.g., --developer ...
 
-          [x] stuff: be more specific if you can.
-
-          [x] setenv HELITA "~/helita-master/helita" is not needed
-
-          [x] You may want to list other servers: Kyoto, Kona, Yale, Karmeliet,
-               Thor 
+          [] BifrostData Objects -> BifrostData class, change
+              in the document each time that you mention BifrostData Objects it
+              should be BifrostData class.
 
 ## New code:
 
@@ -59,34 +55,14 @@
 
     [x] Reduce some empty space (leave at most one empty line). In addition, dont leave
        the empty line between the description below each function. **reduced as much as possible, some required by pep8**
+       	   [] There is still one case with double blank lines. 
 
     [x] Add a very short # comment for relevant variables in the code, e.g.,
        self.preCompFunc, self.preCompShape, self.transformed_dev, self.api,
        self.thr, self.found
+       		 [] Be more precise for each definition within __init__
 
-    [x] Is there any special reason fftHelper, threadIt, task, are functions of another
-       function?. If possible, take it out from get_fft as independent functions.
-       They could be out of the class, towards the end of the file if you like.
-       It would be nice if you make a more meaning full name of all these three functions.
-
-    [x] use_gpu rewrites found. I though found is a flag if the machina has GPUs and CUDA. 
-       Suggestion: 
-
-	    def run_gpu(self, choice=True):
-	    	'''
-		activates the module that uses CUDA
-		'''
-		self.use_gpu = choice
-
-	If you do so, make sure that you change line 117 accordingly. 
-
-     [x] I see several prints. This might be useful but sometimes is anyoing to see
-     	every time these prints. Alternative. Add a flag in __init__ (verbose) if this one is 
-	True, then does the prints, i.e., 
-
-	      if verbose: 
-	      	 print(... 
-	      
+     [] change pre_fft to something more meamningful, e.g., using: linear time interpolation. 
 
 ## Bifrost.py
 
