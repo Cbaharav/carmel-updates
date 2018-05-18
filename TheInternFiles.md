@@ -41,6 +41,13 @@ To install:
  cd helita
  python setup.py install
  ```
+* Optional extensions to "python setup.py install":
+    * __--user__: Non-root install (installs in home directory), use if you don't have write permission to your Python packages directory
+    * __develop__: Developer install, use if you want to install helita but also actively change the code or contribute to its development, can be combined with --user
+    * __build --help-fcompiler__: Checks which fortran compilers are available in system
+    * __build --help-compiler__: Checks which C compilers are available in system
+    * __compiler=xxx__: set C compiler to available compiler family
+    * __fcompiler=yyy__: set Fortran compiler to available compiler family
 * Open helita/helita/io/`__init__`.py (either through Terminal with the "open" command, or by manually opening the file through finder if you are new to Terminal), and change it to read:
  ``` python
  
