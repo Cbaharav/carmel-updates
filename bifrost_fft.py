@@ -6,7 +6,6 @@ import time
 import numpy as np
 import os
 from .bifrost import BifrostData, Rhoeetab, read_idl_ascii
-from . import cstagger
 import imp
 from multiprocessing.dummy import Pool as ThreadPool
 
@@ -28,22 +27,24 @@ class FFTData(BifrostData):
     """
 
     def __init__(self, verbose=False, *args, **kwargs):
-        print(kwargs)
-        print(verbose)
+        if verbose:
+            print(kwargs)
+        # print(verbose)
 
         super(FFTData, self).__init__(*args, **kwargs)
         """
         sets all stored vars to None
         """
-        # set in singleCudaRun
+        # these vars are set in singleCudaRun
+        # pre-compiled fft func (so only one compilation needed per fft size)
         self.preCompFunc = None
-        self.preCompShape = None
-        self.transformed_dev = None
-        self.api = None
-        self.thr = None
-        # whether program has access to pycuda
-        self.found = found
-        self.verbose = verbose
+        self.preCompShape = None  # shape that preCompFunc can take as input
+        self.transformed_dev = None  # array on device, filled with fft results
+        self.api = None  # set to pycuda-based API module, only done once
+        self.thr = None  # thread on device, also only created once
+        self.found = found  # whether program has access to pycuda
+        self.verbose = verbose  # for testing, True --> printouts
+        self.run_gpu()  # when pycuda available, uses it by default
 
     def run_gpu(self, choice=True):
         '''
@@ -108,7 +109,7 @@ class FFTData(BifrostData):
 
         return transformed_piece
 
-    def pre_fft(self, quantity, snap, iix=None, iiy=None, iiz=None):
+    def linearTimeInterp(self, quantity, snap, iix=None, iiy=None, iiz=None):
 
         self.preTransform = self.get_varTime(quantity, snap, iix, iiy, iiz)
         if self.verbose:
@@ -165,8 +166,8 @@ class FFTData(BifrostData):
             uses reikna (cuda & openCL) if available
         """
         # gets data cube, already sliced with iix/iiy/iiz
-        if not (test and self.hasattr(preTransform)):
-            self.pre_fft(quantity, snap, iix, iiy, iiz)
+        if not (test and hasattr(self, 'preTransform')):
+            self.linearTimeInterp(quantity, snap, iix, iiy, iiz)
 
         t0 = time.time()
 
@@ -225,3 +226,11 @@ def threadTask(task, numThreads, *args):
     pool = ThreadPool(processes=numThreads)
     result = np.concatenate(pool.map(task, args)[0])
     return result
+
+def test():
+    dd = FFTData(file_root = 'cb10f', fdir = '/net/opal/Volumes/Amnesia/mpi3drun/Granflux')
+    x = np.linspace(-np.pi, np.pi, 201)
+    dd.preTransform = np.sin(x)
+    dd.freq = np.fft.fftshift(np.fft.fftfreq(np.size(x)))
+    dd.run_gpu(False)
+    return dd.get_fft('o', snap = 430, test = True)
