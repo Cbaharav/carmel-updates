@@ -43,9 +43,9 @@
 
         # TheInternFiles.md: (I also took the liberty to comment on this ;-D)
 
-          [] Add description of other flags in python setup.py install, e.g., --developer ...
+          [x] Add description of other flags in python setup.py install, e.g., --developer ...
 
-          [] BifrostData Objects -> BifrostData class, change
+          [x] BifrostData Objects -> BifrostData class, change
               in the document each time that you mention BifrostData Objects it
               should be BifrostData class.
 
@@ -60,9 +60,9 @@
     [x] Add a very short # comment for relevant variables in the code, e.g.,
        self.preCompFunc, self.preCompShape, self.transformed_dev, self.api,
        self.thr, self.found
-       		 [] Be more precise for each definition within __init__
+       		 [x] Be more precise for each definition within __init__
 
-     [] change pre_fft to something more meamningful, e.g., using: linear time interpolation. 
+     [x] change pre_fft to something more meamningful, e.g., using: linear time interpolation. 
 
 ## Bifrost.py
 
