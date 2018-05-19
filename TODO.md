@@ -35,19 +35,13 @@
 
         #  wiki 
 	  [x] Great first step! you are fast... 
+	      
+	      [] Give me a tour how to do git-wiki ;=D
 
           [] Consider to use (https://www.lmsal.com/iris_science/doc?cmd=dcur&proj_num=IS0124&file_type=pdf)
              for guidance of what could be included so you
              know which other information you could add.
 	     	 [] Add new page about bifrost.py, i.e., things that one could do with import helita.sim.bifrost as br. 
-
-        # TheInternFiles.md: (I also took the liberty to comment on this ;-D)
-
-          [x] Add description of other flags in python setup.py install, e.g., --developer ...
-
-          [x] BifrostData Objects -> BifrostData class, change
-              in the document each time that you mention BifrostData Objects it
-              should be BifrostData class.
 
 ## New code:
 
@@ -55,14 +49,20 @@
 
     [x] Reduce some empty space (leave at most one empty line). In addition, dont leave
        the empty line between the description below each function. **reduced as much as possible, some required by pep8**
-       	   [] There is still one case with double blank lines. 
 
-    [x] Add a very short # comment for relevant variables in the code, e.g.,
-       self.preCompFunc, self.preCompShape, self.transformed_dev, self.api,
-       self.thr, self.found
-       		 [x] Be more precise for each definition within __init__
+       	   [] There is still one case with double blank lines (line 21). 
 
-     [x] change pre_fft to something more meamningful, e.g., using: linear time interpolation. 
+    [] Add a definition of the following functions: singleCudaRun, linearTimeInterp, singleRun, threadTask
+
+    [] test should be in test file not here. 
+
+       [] I don't think you need test flat in get_fft since dd.preTransform and freq are already define. right?
+       	  
+
+     [] self.freq should not be in linearTimeInterp instead in get_fft
+     
+          [] I think it would be nice to have evenDt and evenTimes in self. Also important if 
+	  you move self.freq in get_fft. 
 
 ## Bifrost.py
 
