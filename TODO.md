@@ -8,7 +8,8 @@
 
     [x] Create a TESTS folder.
 
-      [] Add scripts that shows the tests.
+      [partial x] Add scripts that shows the tests.
+      		- one script and resulting plot added
       
       [] Consider to add examples that uses bifrost_fft.py as well as 
       	 the test that you are doing for the various waves where the 
@@ -50,18 +51,19 @@
     [x] Reduce some empty space (leave at most one empty line). In addition, dont leave
        the empty line between the description below each function. **reduced as much as possible, some required by pep8**
 
-       	   [] There is still one case with double blank lines (line 21). 
+       	   [autpep8 keeps on inserting double blank lines when I delete this one] There is still one case with double blank lines (line 21). 
 
-    [] Add a definition of the following functions: singleCudaRun, linearTimeInterp, singleRun, threadTask
+    [x] Add a definition of the following functions: singleCudaRun, linearTimeInterp, singleRun, threadTask
 
-    [] test should be in test file not here. 
+    [x] test should be in test file not here. 
 
-       [] I don't think you need test flat in get_fft since dd.preTransform and freq are already define. right?
+       [x] I don't think you need test flag in get_fft since dd.preTransform and freq are already define. right?
+       		[] note to self: issue- without test flag, get_fft doesn't change preTransform if running on the same FFTData object (regardless of whether snaps, slices, or quantity have changed)
        	  
 
-     [] self.freq should not be in linearTimeInterp instead in get_fft
+     [x] self.freq should not be in linearTimeInterp instead in get_fft
      
-          [] I think it would be nice to have evenDt and evenTimes in self. Also important if 
+          [x] I think it would be nice to have evenDt and evenTimes in self. Also important if 
 	  you move self.freq in get_fft. 
 
 ## Bifrost.py
