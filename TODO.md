@@ -11,7 +11,7 @@
       [partial x] Add scripts that shows the tests.
       		- one script and resulting plot added
       
-      [] Consider to add examples that uses bifrost_fft.py as well as 
+      [x] Consider to add examples that uses bifrost_fft.py as well as 
       	 the test that you are doing for the various waves where the 
 	 result must be 1 or 0. 
 
