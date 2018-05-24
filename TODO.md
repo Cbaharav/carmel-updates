@@ -21,8 +21,6 @@
 
 ## Style:
 
-    [x] Make sure that you fullfil pep8 (I dobout that lines 61, 133, 134, 141, 163
-       are within pep8 rules). 
 
 ## Documentation:
 
@@ -47,11 +45,14 @@
 ## New code:
 
     [x] Layout looks nice!
+    
+    [] I think you forgot to commit your changes... I dont see a new update of the code. So, I can't test this...
 
     [x] Reduce some empty space (leave at most one empty line). In addition, dont leave
        the empty line between the description below each function. **reduced as much as possible, some required by pep8**
 
        	   [autpep8 keeps on inserting double blank lines when I delete this one] There is still one case with double blank lines (line 21). 
+	   JMS Interesting. ...
 
     [x] Add a definition of the following functions: singleCudaRun, linearTimeInterp, singleRun, threadTask
 
@@ -65,6 +66,9 @@
      
           [x] I think it would be nice to have evenDt and evenTimes in self. Also important if 
 	  you move self.freq in get_fft. 
+	  
+     [] Add spatial power spectrum functions in a similar way as you did for the time axis. 
+     Please, come over my office I'll explain  in detail
 
 ## Bifrost.py
 
