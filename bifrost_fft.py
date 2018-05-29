@@ -56,7 +56,11 @@ class FFTData(BifrostData):
             self.use_gpu = False
 
     def singleCudaRun(self, arr):
-
+        """
+        uses pycuda fft (reikna) on given array
+        - sends whole array to device at once, may be too much for device
+          memory if arr is too large
+        """
         shape = np.shape(arr)
         if self.verbose:
             print(shape)
@@ -110,6 +114,25 @@ class FFTData(BifrostData):
         return transformed_piece
 
     def linearTimeInterp(self, quantity, snap, iix=None, iiy=None, iiz=None):
+        """
+        - loads quantity
+        - if gaps between snaps are inconsistent, interpolates the data
+
+        Parameters
+        ----------
+        quantity - string
+        snap - array or list
+        iix, iiy, and iiz - ints, lists, arrays, or Nones
+            slices data cube
+
+        Returns
+        -------
+        nothing, but defines self.preTransform, self.evenDt, and self.dt
+
+        Notes
+        -----
+            uses reikna (cuda & openCL) if available
+        """
 
         self.preTransform = self.get_varTime(quantity, snap, iix, iiy, iiz)
         if self.verbose:
@@ -117,12 +140,12 @@ class FFTData(BifrostData):
 
         # gets rid of array dimensions of 1
         self.preTransform = np.squeeze(self.preTransform)
-        dt = self.params['dt']
+        self.dt = self.params['dt']
         t = self.params['t']
 
         # checking to see if time gap between snaps is consistent
         uneven = False
-        for i in range(1, np.size(dt) - 1):
+        for i in range(1, np.size(self.dt) - 1):
             if abs((t[i] - t[i - 1]) - (t[i+1] - t[i])) > 0.02:
                 uneven = True
                 break
@@ -131,18 +154,15 @@ class FFTData(BifrostData):
         if uneven:
             if self.verbose:
                 print('uneven dt')
-            evenTimes = np.linspace(t[0], t[-1], np.size(dt))
+            evenTimes = np.linspace(t[0], t[-1], np.size(self.dt))
             interp = sp.interpolate.interp1d(t, self.preTransform)
             self.preTransform = interp(evenTimes)
-            evenDt = evenTimes[1] - evenTimes[0]
+            self.evenDt = evenTimes[1] - evenTimes[0]
         else:
-            evenDt = dt[0]
-
-        # finds frequency with evenly spaced times
-        self.freq = np.fft.fftshift(np.fft.fftfreq(np.size(dt), evenDt * 100))
+            self.evenDt = self.dt[0]
 
     def get_fft(self, quantity, snap, numThreads=1, numBlocks=1,
-                iix=None, iiy=None, iiz=None, test=False):
+                iix=None, iiy=None, iiz=None):
         """
         Calculates FFT (by calling fftHelper)
 
@@ -165,9 +185,13 @@ class FFTData(BifrostData):
         -----
             uses reikna (cuda & openCL) if available
         """
+
         # gets data cube, already sliced with iix/iiy/iiz
-        if not (test and hasattr(self, 'preTransform')):
+        if not hasattr(self, 'preTransform'):
             self.linearTimeInterp(quantity, snap, iix, iiy, iiz)
+            # finds frequency with evenly spaced times
+            self.freq = np.fft.fftshift(np.fft.fftfreq(
+                np.size(self.dt), self.evenDt * 100))
 
         t0 = time.time()
 
@@ -211,11 +235,33 @@ class FFTData(BifrostData):
 
 
 def singleRun(arr):
+    """
+    uses numpy fft on given array
+        - could be entire array, or a piece of a larger array
+    runs linearly
+    """
     transformed_piece = np.abs(np.fft.fftshift((np.fft.fft(arr)), axes=-1))
     return transformed_piece
 
 
 def threadTask(task, numThreads, *args):
+    """
+    Threads a given method using python multiprocessing
+
+    Parameters
+    ----------
+    task - method to be parallelized
+    numThreads - number of threads to be run in parallel
+    *args - parameters for the task
+
+    Returns
+    -------
+    array - same results as if done linearly, just calculated in parallel
+
+    Notes
+    -----
+        does not use cuda, uses python multiprocessing
+    """
     # split arg arrays
     args = list(args)
 
@@ -226,11 +272,3 @@ def threadTask(task, numThreads, *args):
     pool = ThreadPool(processes=numThreads)
     result = np.concatenate(pool.map(task, args)[0])
     return result
-
-def test():
-    dd = FFTData(file_root = 'cb10f', fdir = '/net/opal/Volumes/Amnesia/mpi3drun/Granflux')
-    x = np.linspace(-np.pi, np.pi, 201)
-    dd.preTransform = np.sin(x)
-    dd.freq = np.fft.fftshift(np.fft.fftfreq(np.size(x)))
-    dd.run_gpu(False)
-    return dd.get_fft('o', snap = 430, test = True)
