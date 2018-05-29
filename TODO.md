@@ -15,7 +15,7 @@
       	 the test that you are doing for the various waves where the 
 	 result must be 1 or 0. 
 
-      [] Add real test, i.e., from one simulation that shows a map of height, i.e., z axis vs 
+      [partial x] Add real test, i.e., from one simulation that shows a map of height, i.e., z axis vs 
       frequency where you do average of the FFT in x and y. This might be included as a new
       function (without the plot.imshow()) in the code. 
 
