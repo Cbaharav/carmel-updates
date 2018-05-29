@@ -17,7 +17,9 @@
 
       [partial x] Add real test, i.e., from one simulation that shows a map of height, i.e., z axis vs 
       frequency where you do average of the FFT in x and y. This might be included as a new
-      function (without the plot.imshow()) in the code. 
+      function (without the plot.imshow()) in the code.
+      		- added script & resulting plots
+		- will add axis labels & run on more snaps (top plot: freq vs amplitude with lines for different z values, bottom plot: freq vs z value with colors for amplitude)
 
 ## Style:
 
