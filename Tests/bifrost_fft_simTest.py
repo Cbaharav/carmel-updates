@@ -4,12 +4,14 @@ from helita.sim.bifrost import BifrostData, Rhoeetab, read_idl_ascii
 from helita.sim.bifrost_fft import FFTData
 import matplotlib.pyplot as plt
 
-snaps = [430, 431, 432, 433, 434, 435, 436]
+snaps = np.arange(430, 435)
 v = 'uz'
+# threads = 10
 
-dd = FFTData(file_root = 'cb10f', fdir = '/net/opal/Volumes/Amnesia/mpi3drun/Granflux')
+dd = FFTData(file_root = 'cb10f', fdir = '/net/opal/Volumes/Amnesia/mpi3drun/Granflux', verbose = True)
 
 transformed = dd.get_fft(v, snaps)
+print('got fft')
 ft = transformed['ftCube']
 freq = transformed['freq']
 zaxis = dd.z
@@ -29,8 +31,13 @@ numR = 1
 
 plt.subplot(numC, numR, 1)
 plt.plot(freq, zstack)
-
+plt.xlabel('Frequency')
+plt.ylabel('Amplitude')
+plt.title('Average Amplitude of FT Frequencies at Different Z Positions (1)')
 
 plt.subplot(numC, numR, 2)
 plt.imshow(zstack.transpose(), extent = [freq[0], freq[-1], zaxis[0], zaxis[-1]])
+plt.xlabel('Frequency')
+plt.ylabel('Z Position')
+plt.title('Average Amplitude of FT Frequencies at Different Z Positions (2)')
 plt.show()
