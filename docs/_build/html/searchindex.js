@@ -1,0 +1,1 @@
+Search.setIndex({docnames:["index"],envversion:51,filenames:["index.rst"],objects:{},objnames:{},objtypes:{},terms:{baharav:0,base:0,carmel:0,index:0,jun:0,last:0,modul:0,page:0,pereira:0,search:0,templat:0,tiago:0,updat:0},titles:["Welcome to bifrostDocs&#8217;s documentation!"],titleterms:{bifrostdoc:0,document:0,indic:0,tabl:0,welcom:0}})
