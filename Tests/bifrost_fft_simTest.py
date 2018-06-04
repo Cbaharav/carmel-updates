@@ -2,6 +2,8 @@ import numpy as np
 import helita.sim.cstagger
 from helita.sim.bifrost import BifrostData, Rhoeetab, read_idl_ascii
 from helita.sim.bifrost_fft import FFTData
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 snaps = np.arange(430, 435)
@@ -9,8 +11,8 @@ v = 'uz'
 # threads = 10
 
 dd = FFTData(file_root = 'cb10f', fdir = '/net/opal/Volumes/Amnesia/mpi3drun/Granflux', verbose = True)
-
-transformed = dd.get_fft(v, snaps)
+dd.run_gpu()
+transformed = dd.get_fft(v, snaps, numBlocks = 5)
 print('got fft')
 ft = transformed['ftCube']
 freq = transformed['freq']
@@ -40,4 +42,5 @@ plt.imshow(zstack.transpose(), extent = [freq[0], freq[-1], zaxis[0], zaxis[-1]]
 plt.xlabel('Frequency')
 plt.ylabel('Z Position')
 plt.title('Average Amplitude of FT Frequencies at Different Z Positions (2)')
-plt.show()
+plt.tight_layout()
+plt.savefig('helita/helita/sim/testResult.png')
