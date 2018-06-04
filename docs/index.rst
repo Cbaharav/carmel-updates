@@ -12,15 +12,10 @@ Welcome to bifrost.py's documentation!
 
    Last updated on |today|.
 
+Contents:
+
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+   :maxdepth: 3
 
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+   bifrost.rst
+   bq_t5.rst
