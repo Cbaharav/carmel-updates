@@ -7,15 +7,15 @@ Welcome to bifrost.py's documentation!
 =======================================
 .. only:: html
 
-   By Carmel Baharav,
-   based on template by Tiago M. D. Pereira.
+   By Carmel Baharav, includes some previous documentation by Tiago M. D. Pereira.
 
    Last updated on |today|.
 
 Contents:
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 2
 
+   helita.rst
    bifrost.rst
    bq_t5.rst
