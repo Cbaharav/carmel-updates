@@ -1,0 +1,71 @@
+******
+helita
+******
+Helita documentation can be found here:
+
+http://helita.readthedocs.io/en/latest/index.html
+
+This section is taken directly from the link above.
+
+Helita is a Python library for solar physics focused on interfacing with code and projects from the `Institute of Theoretical Astrophysics <http://astro.uio.no>`_ (ITA) at the `University of Oslo <https://www.uio.no>`_. The name comes from Helios + ITA.
+
+Currently, the library is a loose collection of different scripts and classes with varying degrees of portability and usefulness.
+
+Pre-requisites
+==============
+To make use of helita **you need a Fortran compiler** (`GFortran <https://gcc.gnu.org/wiki/GFortran>`_ is recommended), because some modules are compiled from Fortran. In addition, before attempting to install helita you need the following:
+
+* `Python (2.7.x, 3.4.x or later) <https://www.python.org>`_
+* `Astropy <http://www.astropy.org>`_
+* `NumPy <http://www.numpy.org>`_
+* `SciPy <https://www.scipy.org>`_
+
+In addition, the following packages are also recommended to take advantage of all the features:
+
+* `Matplotlib <https://matplotlib.org>`_
+* `h5py <http://www.h5py.org>`_
+* `netCDF4 <https://unidata.github.io/netcdf4-python/>`_
+* `Cython <http://cython.org>`_
+* `pandas <http://pandas.pydata.org>`_
+* `beautifulsoup4 <https://www.crummy.com/software/BeautifulSoup/>`_
+
+Helita will install without the above packages, but functionality will be limited.
+
+All of the above packages are available through Anaconda, and that is the recommended way of setting up your Python distribution.
+
+Cloning git repository
+======================
+The easiest way is to use git to clone the repository. To grab the latest version of helita and install it::
+
+	$ git clone https://github.com/ITA-solar/helita.git
+	$ cd helita
+	$ python setup.py install
+  
+
+Non-root install
+================
+If you don't have write permission to your Python packages directory, use the following option with setup.py::
+
+	$ python setup.py install --user
+
+This will install helita under your home directory (typically ~/.local)
+
+Developer install
+=================
+If you want to install helita but also actively change the code or contribute to its development, it is recommended that you do a developer install instead::
+
+	$ python setup.py develop
+
+This will set up the package, such as the source files used, from the git repository that you cloned (only a link to it is placed on the Python packages directory). Can also be combined with the *-user* flag for local installs::
+
+	$ python setup.py develop --user
+
+Installing with different C or Fortran compilers
+================================================
+The procedure above will compile the C and Fortran modules using the default gcc/gfortran compilers. It will fail if these are not available in the system. If you want to use a different compiler, please use *setup.py* with the *-compiler=xxx* and/or *-fcompiler=yyy* options, where *xxx*, *yyy* are C and Fortran compiler families (names depend on system). To check which Fortran compilers are available in your system, you can run::
+
+	$ python setup.py build --help-fcompiler
+
+and to check which C compilers are available::
+
+	$ python setup.py build --help-compiler
