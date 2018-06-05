@@ -61,7 +61,8 @@
     [x] test should be in test file not here. 
 
        [x] I don't think you need test flag in get_fft since dd.preTransform and freq are already define. right?
-       		[] note to self: issue- without test flag, get_fft doesn't change preTransform if running on the same FFTData object (regardless of whether snaps, slices, or quantity have changed)
+       		[x] note to self: issue- without test flag, get_fft doesn't change preTransform if running on the same FFTData object (regardless of whether snaps, slices, or quantity have changed)
+		- fixed by checking if snap is int, if not it is a test
        	  
 
      [x] self.freq should not be in linearTimeInterp instead in get_fft
