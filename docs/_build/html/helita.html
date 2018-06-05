@@ -189,7 +189,7 @@
 <div class="section" id="cloning-git-repository">
 <h2>Cloning git repository<a class="headerlink" href="#cloning-git-repository" title="Permalink to this headline">¶</a></h2>
 <p>The easiest way is to use git to clone the repository. To grab the latest version of helita and install it:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ git clone https://github.com/ITA-solar/helita.git
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/ITA-solar/helita.git
 $ cd helita
 $ python setup.py install
 </pre></div>
@@ -197,8 +197,8 @@ $ python setup.py install
 </div>
 <div class="section" id="non-root-install">
 <h2>Non-root install<a class="headerlink" href="#non-root-install" title="Permalink to this headline">¶</a></h2>
-<p>If you don&#8217;t have write permission to your Python packages directory, use the following option with setup.py:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ python setup.py install --user
+<p>If you don’t have write permission to your Python packages directory, use the following option with setup.py:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python setup.py install --user
 </pre></div>
 </div>
 <p>This will install helita under your home directory (typically ~/.local)</p>
@@ -206,22 +206,22 @@ $ python setup.py install
 <div class="section" id="developer-install">
 <h2>Developer install<a class="headerlink" href="#developer-install" title="Permalink to this headline">¶</a></h2>
 <p>If you want to install helita but also actively change the code or contribute to its development, it is recommended that you do a developer install instead:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ python setup.py develop
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python setup.py develop
 </pre></div>
 </div>
 <p>This will set up the package, such as the source files used, from the git repository that you cloned (only a link to it is placed on the Python packages directory). Can also be combined with the <em>-user</em> flag for local installs:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ python setup.py develop --user
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python setup.py develop --user
 </pre></div>
 </div>
 </div>
 <div class="section" id="installing-with-different-c-or-fortran-compilers">
 <h2>Installing with different C or Fortran compilers<a class="headerlink" href="#installing-with-different-c-or-fortran-compilers" title="Permalink to this headline">¶</a></h2>
 <p>The procedure above will compile the C and Fortran modules using the default gcc/gfortran compilers. It will fail if these are not available in the system. If you want to use a different compiler, please use <em>setup.py</em> with the <em>-compiler=xxx</em> and/or <em>-fcompiler=yyy</em> options, where <em>xxx</em>, <em>yyy</em> are C and Fortran compiler families (names depend on system). To check which Fortran compilers are available in your system, you can run:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ python setup.py build --help-fcompiler
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python setup.py build --help-fcompiler
 </pre></div>
 </div>
 <p>and to check which C compilers are available:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ python setup.py build --help-compiler
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python setup.py build --help-compiler
 </pre></div>
 </div>
 </div>
