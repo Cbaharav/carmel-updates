@@ -85,7 +85,23 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="helita.html">helita</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bifrost.html">bifrost.py</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">bq_t5_look Tool</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">bq_t5_look Tool</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#setup">Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#launch">Launch</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#description">Description</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#initial-window">Initial Window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#overlays-additional-settings">Overlays &amp; Additional Settings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#vectors">1. Vectors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lines">2. Lines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#contour">3. Contour</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#additional-display-features">4. Additional Display Features</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#movies-and-animation">Movies and Animation</a></li>
+</ul>
+</li>
 </ul>
 
             
@@ -152,10 +168,79 @@
             
   <div class="section" id="bq-t5-look-tool">
 <h1>bq_t5_look Tool<a class="headerlink" href="#bq-t5-look-tool" title="Permalink to this headline">¶</a></h1>
-<p>This tool can be used to visualize and manipulate data sets produced by Bifrost simulations. Previous tools were written in IDL, but this tool is written in Python, increasing accessibility. It also has a range of added features including the creation of movies and animations</p>
+<p>This tool can be used to visualize and manipulate data sets produced by Bifrost simulations. Previous tools were written in IDL, but this tool is written in Python, increasing accessibility. It also has a range of added features including the creation of movies and animations.</p>
 <div class="figure" id="id1">
 <img alt="_images/finalAGUPoster.png" src="_images/finalAGUPoster.png" />
 <p class="caption"><span class="caption-text">Poster submitted to AGU Virtual Poster Showcase Fall 2017</span></p>
+</div>
+<div class="section" id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
+<p><strong>I’m not sure how people would get access to Bifrost, is it on github?</strong>
+This tool can be found in Bifrost (which is a separate folder from helita), and requires that helita be installed in order to function. Once you have created a path for the Bifrost folder, add that path to your .cshrc, eg:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">setenv</span> <span class="n">BIFROSTPATH</span> <span class="n">yourpath</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="launch">
+<h2>Launch<a class="headerlink" href="#launch" title="Permalink to this headline">¶</a></h2>
+<p>To launch the tool, call:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">path_to_file</span> <span class="o">-</span><span class="n">i</span> <span class="n">path_to_snapshot</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>Possible extensions include:</dt>
+<dd><ul class="first last simple">
+<li>-i / –input: required, points to snapshot file</li>
+<li>-h / –help: returns help message</li>
+<li>-s / –slice: the initial slice shown, defaults to 0</li>
+<li>-e / –ebysus: code based on Bifrost</li>
+</ul>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="description">
+<h1>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h1>
+<img alt="_images/forDocs.png" src="_images/forDocs.png" />
+<div class="section" id="initial-window">
+<h2>Initial Window<a class="headerlink" href="#initial-window" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Slider: moves through third dimension</li>
+<li>Variable choice: select variable to be plotted from dropdown</li>
+<li>Customizable quantity: input custom data for image</li>
+<li>Plane view: select plane view from dropdown</li>
+<li>Control of overlays: quickly add or remove overlays specified in respective window</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="overlays-additional-settings">
+<h2>Overlays &amp; Additional Settings<a class="headerlink" href="#overlays-additional-settings" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="vectors">
+<h3>1. Vectors<a class="headerlink" href="#vectors" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>This feature allows the user to visualize non-scalar data. The user can manipulate:</dt>
+<dd><ul class="first last simple">
+<li>Vector quantity (eg. p or u)</li>
+<li>Arrow head width/length</li>
+<li>Arrow shaft width</li>
+<li>Sparsity of vectors shown</li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="lines">
+<h3>2. Lines<a class="headerlink" href="#lines" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="contour">
+<h3>3. Contour<a class="headerlink" href="#contour" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="additional-display-features">
+<h3>4. Additional Display Features<a class="headerlink" href="#additional-display-features" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="movies-and-animation">
+<h2>Movies and Animation<a class="headerlink" href="#movies-and-animation" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
