@@ -29,7 +29,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="bifrost.py" href="bifrost.html" />
+    <link rel="next" title="bq_t5_look Tool" href="bq_t5.html" />
     <link rel="prev" title="Welcome to bifrost.py’s documentation!" href="index.html" /> 
 
   
@@ -85,16 +85,23 @@
             
               <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">helita</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#pre-requisites">Pre-requisites</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#cloning-git-repository">Cloning git repository</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#non-root-install">Non-root install</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#developer-install">Developer install</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#installing-with-different-c-or-fortran-compilers">Installing with different C or Fortran compilers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pre-requisites">Pre-requisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cloning-git-repository">Cloning git repository</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#non-root-install">Non-root install</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#developer-install">Developer install</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#installing-with-different-c-or-fortran-compilers">Installing with different C or Fortran compilers</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="bifrost.html">bifrost.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bifrost-py">bifrost.py</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#bifrostdata-class">BifrostData Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#getting-variables-quantities">Getting Variables &amp; Quantities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fftdata-class">FFTData Class</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="bq_t5.html">bq_t5_look Tool</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bq_t5.html#description">Description</a></li>
 </ul>
 
             
@@ -166,8 +173,10 @@
 <p>This section is taken directly from the link above.</p>
 <p>Helita is a Python library for solar physics focused on interfacing with code and projects from the <a class="reference external" href="http://astro.uio.no">Institute of Theoretical Astrophysics</a> (ITA) at the <a class="reference external" href="https://www.uio.no">University of Oslo</a>. The name comes from Helios + ITA.</p>
 <p>Currently, the library is a loose collection of different scripts and classes with varying degrees of portability and usefulness.</p>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="pre-requisites">
-<h2>Pre-requisites<a class="headerlink" href="#pre-requisites" title="Permalink to this headline">¶</a></h2>
+<h3>Pre-requisites<a class="headerlink" href="#pre-requisites" title="Permalink to this headline">¶</a></h3>
 <p>To make use of helita <strong>you need a Fortran compiler</strong> (<a class="reference external" href="https://gcc.gnu.org/wiki/GFortran">GFortran</a> is recommended), because some modules are compiled from Fortran. In addition, before attempting to install helita you need the following:</p>
 <ul class="simple">
 <li><a class="reference external" href="https://www.python.org">Python (2.7.x, 3.4.x or later)</a></li>
@@ -188,7 +197,7 @@
 <p>All of the above packages are available through Anaconda, and that is the recommended way of setting up your Python distribution.</p>
 </div>
 <div class="section" id="cloning-git-repository">
-<h2>Cloning git repository<a class="headerlink" href="#cloning-git-repository" title="Permalink to this headline">¶</a></h2>
+<h3>Cloning git repository<a class="headerlink" href="#cloning-git-repository" title="Permalink to this headline">¶</a></h3>
 <p>The easiest way is to use git to clone the repository. To grab the latest version of helita and install it:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/ITA-solar/helita.git
 $ cd helita
@@ -197,7 +206,7 @@ $ python setup.py install
 </div>
 </div>
 <div class="section" id="non-root-install">
-<h2>Non-root install<a class="headerlink" href="#non-root-install" title="Permalink to this headline">¶</a></h2>
+<h3>Non-root install<a class="headerlink" href="#non-root-install" title="Permalink to this headline">¶</a></h3>
 <p>If you don’t have write permission to your Python packages directory, use the following option with setup.py:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python setup.py install --user
 </pre></div>
@@ -205,7 +214,7 @@ $ python setup.py install
 <p>This will install helita under your home directory (typically ~/.local)</p>
 </div>
 <div class="section" id="developer-install">
-<h2>Developer install<a class="headerlink" href="#developer-install" title="Permalink to this headline">¶</a></h2>
+<h3>Developer install<a class="headerlink" href="#developer-install" title="Permalink to this headline">¶</a></h3>
 <p>If you want to install helita but also actively change the code or contribute to its development, it is recommended that you do a developer install instead:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python setup.py develop
 </pre></div>
@@ -216,7 +225,7 @@ $ python setup.py install
 </div>
 </div>
 <div class="section" id="installing-with-different-c-or-fortran-compilers">
-<h2>Installing with different C or Fortran compilers<a class="headerlink" href="#installing-with-different-c-or-fortran-compilers" title="Permalink to this headline">¶</a></h2>
+<h3>Installing with different C or Fortran compilers<a class="headerlink" href="#installing-with-different-c-or-fortran-compilers" title="Permalink to this headline">¶</a></h3>
 <p>The procedure above will compile the C and Fortran modules using the default gcc/gfortran compilers. It will fail if these are not available in the system. If you want to use a different compiler, please use <em>setup.py</em> with the <em>-compiler=xxx</em> and/or <em>-fcompiler=yyy</em> options, where <em>xxx</em>, <em>yyy</em> are C and Fortran compiler families (names depend on system). To check which Fortran compilers are available in your system, you can run:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python setup.py build --help-fcompiler
 </pre></div>
@@ -224,6 +233,44 @@ $ python setup.py install
 <p>and to check which C compilers are available:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python setup.py build --help-compiler
 </pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="bifrost-py">
+<h2>bifrost.py<a class="headerlink" href="#bifrost-py" title="Permalink to this headline">¶</a></h2>
+<p>bifrost.py is a set of tools to read and interact with output from Bifrost simulations.</p>
+<div class="section" id="bifrostdata-class">
+<h3>BifrostData Class<a class="headerlink" href="#bifrostdata-class" title="Permalink to this headline">¶</a></h3>
+<p>bifrost.py includes the BifrostData class (among others). The following allows to create the class for snapshot number 430 from simulation ‘cb10f’ from directory ‘/net/opal/Volumes/Amnesia/mpi3drun/Granflux’:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">helita.sim</span> <span class="k">import</span> <span class="n">bifrost</span> <span class="k">as</span> <span class="n">br</span>
+<span class="n">dd</span> <span class="o">=</span> <span class="n">br</span><span class="o">.</span><span class="n">BifrostData</span><span class="p">(</span><span class="s1">&#39;cb10f&#39;</span><span class="p">,</span> <span class="n">snap</span> <span class="o">=</span> <span class="mi">430</span><span class="p">,</span> <span class="n">fdir</span> <span class="o">=</span> <span class="s1">&#39;/net/opal/Volumes/Amnesia/mpi3drun/Granflux&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The snapshot(s) being read can be defined when creating the object, or set/changed anytime later. Snaps can be ints, arrays, or lists.</p>
+</div>
+<div class="section" id="getting-variables-quantities">
+<h3>Getting Variables &amp; Quantities<a class="headerlink" href="#getting-variables-quantities" title="Permalink to this headline">¶</a></h3>
+<p>get_var and get_varTime can be used to read variables as well as to calculate quantities (with a call to _get_quantity). iix, iiy, and iiz can be specified to slice the return array (they can be ints, arrays, or lists). If no snapshot is specified, the current snap value will be used (either the initialized one, which is the first in the series, or the most recent snap used in set_snap or in a call to get_var). To get variable ‘r’ at snap 430 with only values at y = 200, z = 5, and z = 7:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">var1</span> <span class="o">=</span> <span class="n">dd</span><span class="o">.</span><span class="n">get_var</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">snap</span> <span class="o">=</span> <span class="mi">430</span><span class="p">,</span> <span class="n">iiy</span> <span class="o">=</span> <span class="mi">200</span><span class="p">,</span> <span class="n">iiz</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>get_varTime can be used in the same fashion, with the added option of reading a specific variable or quantity from many snapshots at once. Its return arrays have an added dimension for time.</p>
+</div>
+<div class="section" id="fftdata-class">
+<h3>FFTData Class<a class="headerlink" href="#fftdata-class" title="Permalink to this headline">¶</a></h3>
+<p>This class can be found within bifrost_fft.py. It performs operations on Bifrost simulation data in its native format. After creating a class for a specific snap root name and directory (much like with BifrostData), one can get a dictionary of the frequency and amplitude of the Fourier Transform for a certain quantity over a range of snapshots.</p>
+<p>#.. ipython:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="kn">from</span> <span class="nn">helita.sim</span> <span class="k">import</span> <span class="n">bifrost_fft</span> <span class="k">as</span> <span class="n">brft</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">dd</span> <span class="o">=</span> <span class="n">brft</span><span class="o">.</span><span class="n">FFTData</span><span class="p">(</span><span class="n">file_root</span> <span class="o">=</span> <span class="s1">&#39;cb10f&#39;</span><span class="p">,</span> <span class="n">fdir</span> <span class="o">=</span> <span class="s1">&#39;/net/opal/Volumes/Amnesia/mpi3drun/Granflux&#39;</span><span class="p">)</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="n">transformed</span> <span class="o">=</span> <span class="n">dd</span><span class="o">.</span><span class="n">get_fft</span><span class="p">(</span><span class="s1">&#39;ux&#39;</span><span class="p">,</span> <span class="n">snap</span> <span class="o">=</span> <span class="p">[</span><span class="mi">430</span><span class="p">,</span> <span class="mi">431</span><span class="p">,</span> <span class="mi">432</span><span class="p">,</span> <span class="mi">433</span><span class="p">])</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="n">transformed</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+</pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -236,7 +283,7 @@ $ python setup.py install
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="bifrost.html" class="btn btn-neutral float-right" title="bifrost.py" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="bq_t5.html" class="btn btn-neutral float-right" title="bq_t5_look Tool" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="index.html" class="btn btn-neutral" title="Welcome to bifrost.py’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

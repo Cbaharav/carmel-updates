@@ -4,6 +4,7 @@ bq_t5_look Tool
 This tool can be used to visualize and manipulate data sets produced by Bifrost simulations. Previous tools were written in IDL, but this tool is written in Python, increasing accessibility. It also has a range of added features including the creation of movies and animations.
 
 .. figure:: finalAGUPoster.png
+	:width: 50%
 
 	Poster submitted to AGU Virtual Poster Showcase Fall of 2017
 
@@ -43,6 +44,8 @@ Overlays & Additional Settings
 ------------------------------
 Each of the overlays (vectors, lines, and contour) has its own corresponding pop-up settings window that can be opened from the initial page of the tool. As previously mentioned, the initial window also has the option to quickly hide/reveal a previously loaded overlay. By default, all overlays are shown once a quantity is specified.
 
+=====
+
 1. Vectors
 ^^^^^^^^^^
 .. figure:: vector_settings.png
@@ -77,6 +80,18 @@ Lines offer the user another method of illustrating non-scalar data besides vect
 
 3. Contour
 ^^^^^^^^^^
+.. figure:: contour_settings.png
+	:align: right
+	:scale: 25%
+
+	Contour Settings Window
+
+Plotting contours allows the user to display two scalar quantities simultaneously. The user can determine:
+	* Contour quantity (can select from dropdown or specify custom quantity)
+	* Scale (eg. absolute or log)
+	* Units (CGS)
+	* Minimum and maximum used (based on individual slice, whole data cube, or custom values)
+	* Color map
 
 4. Additional Display Features
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

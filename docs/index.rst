@@ -14,8 +14,7 @@ Welcome to bifrost.py's documentation!
 Contents:
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
 
    helita.rst
-   bifrost.rst
    bq_t5.rst
