@@ -93,9 +93,46 @@ Plotting contours allows the user to display two scalar quantities simultaneousl
 	* Minimum and maximum used (based on individual slice, whole data cube, or custom values)
 	* Color map
 
+=====
+
 4. Additional Display Features
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. figure:: display_settings.png
+	:align: right
+	:scale: 25%
+
+	Display Settings Window
+
+These settings alter the background image and provide similar options to the contour settings. The added specifications are:
+	* Black and white image
+	* Dynamic range
+
+The repeated features are:
+	* Scale
+	* Units
+	* Minimum and maximum used
+	* Color Map
+
+=====
 
 5. Movies and Animation
 ^^^^^^^^^^^^^^^^^^^^^^^
+.. figure:: animation_settings.png
+	:align: right
+	:scale: 25%
 
+	Animation Settings Window
+
+Both animations and movies use the current settings (including any overlays that are active), and can move through either time or space. With both, the user can specify:
+	* Start depth and end depth
+	* OR start time and end time (if "Through Time" box is checked)
+
+Animation features:
+	* Make animation begins the animation on the display window
+	* User can pause/play current animation at any point
+	* Animation will loop until paused
+
+Movie features:
+	* File destination (default is hoome directory)
+	* Frames per second
+	* Whether pictures should be saved or removed (the movie is created from saved pictures)

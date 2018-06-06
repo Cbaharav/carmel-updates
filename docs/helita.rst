@@ -73,6 +73,8 @@ and to check which C compilers are available::
 
 	$ python setup.py build --help-compiler
 
+=====
+
 bifrost.py
 ==========
 bifrost.py is a set of tools to read and interact with output from Bifrost simulations.
