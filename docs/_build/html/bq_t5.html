@@ -88,18 +88,18 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">bq_t5_look Tool</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#setup">Setup</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#launch">Launch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#description">Description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#initial-window">Initial Window</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#overlays-additional-settings">Overlays &amp; Additional Settings</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#vectors">1. Vectors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lines">2. Lines</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#contour">3. Contour</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#additional-display-features">4. Additional Display Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#movies-and-animation">5. Movies and Animation</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="#description">Description</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#initial-window">Initial Window</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#overlays-additional-settings">Overlays &amp; Additional Settings</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#vectors">1. Vectors</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#lines">2. Lines</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#contour">3. Contour</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#additional-display-features">4. Additional Display Features</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#movies-and-animation">Movies and Animation</a></li>
 </ul>
 </li>
 </ul>
@@ -171,7 +171,7 @@
 <p>This tool can be used to visualize and manipulate data sets produced by Bifrost simulations. Previous tools were written in IDL, but this tool is written in Python, increasing accessibility. It also has a range of added features including the creation of movies and animations.</p>
 <div class="figure" id="id1">
 <img alt="_images/finalAGUPoster.png" src="_images/finalAGUPoster.png" />
-<p class="caption"><span class="caption-text">Poster submitted to AGU Virtual Poster Showcase Fall 2017</span></p>
+<p class="caption"><span class="caption-text">Poster submitted to AGU Virtual Poster Showcase Fall of 2017</span></p>
 </div>
 <div class="section" id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
@@ -192,18 +192,18 @@ This tool can be found in Bifrost (which is a separate folder from helita), and 
 <dd><ul class="first last simple">
 <li>-i / –input: required, points to snapshot file</li>
 <li>-h / –help: returns help message</li>
-<li>-s / –slice: the initial slice shown, defaults to 0</li>
+<li>-s / –slice: jumps directly to data[:, :, slice], defaults to 0</li>
+<li>-z / –depth: finds a slice at the corresponding depth value provided in real [mM] coordinates</li>
 <li>-e / –ebysus: code based on Bifrost</li>
 </ul>
 </dd>
 </dl>
 </div>
-</div>
 <div class="section" id="description">
-<h1>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h1>
-<img alt="_images/forDocs.png" src="_images/forDocs.png" />
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<img alt="_images/description.png" src="_images/description.png" />
 <div class="section" id="initial-window">
-<h2>Initial Window<a class="headerlink" href="#initial-window" title="Permalink to this headline">¶</a></h2>
+<h3>Initial Window<a class="headerlink" href="#initial-window" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
 <li>Slider: moves through third dimension</li>
@@ -215,9 +215,14 @@ This tool can be found in Bifrost (which is a separate folder from helita), and 
 </div></blockquote>
 </div>
 <div class="section" id="overlays-additional-settings">
-<h2>Overlays &amp; Additional Settings<a class="headerlink" href="#overlays-additional-settings" title="Permalink to this headline">¶</a></h2>
+<h3>Overlays &amp; Additional Settings<a class="headerlink" href="#overlays-additional-settings" title="Permalink to this headline">¶</a></h3>
+<p>Each of the overlays (vectors, lines, and contour) has its own corresponding pop-up settings window that can be opened from the initial page of the tool. As previously mentioned, the initial window also has the option to quickly hide/reveal a previously loaded overlay. By default, all overlays are shown once a quantity is specified.</p>
 <div class="section" id="vectors">
-<h3>1. Vectors<a class="headerlink" href="#vectors" title="Permalink to this headline">¶</a></h3>
+<h4>1. Vectors<a class="headerlink" href="#vectors" title="Permalink to this headline">¶</a></h4>
+<div class="figure align-right" id="id2">
+<a class="reference internal image-reference" href="_images/vector_settings.png"><img alt="_images/vector_settings.png" src="_images/vector_settings.png" style="width: 251.0px; height: 137.0px;" /></a>
+<p class="caption"><span class="caption-text">Vector Settings Window</span></p>
+</div>
 <dl class="docutils">
 <dt>This feature allows the user to visualize non-scalar data. The user can manipulate:</dt>
 <dd><ul class="first last simple">
@@ -229,18 +234,35 @@ This tool can be found in Bifrost (which is a separate folder from helita), and 
 </dd>
 </dl>
 </div>
+<hr class="docutils" />
 <div class="section" id="lines">
-<h3>2. Lines<a class="headerlink" href="#lines" title="Permalink to this headline">¶</a></h3>
+<h4>2. Lines<a class="headerlink" href="#lines" title="Permalink to this headline">¶</a></h4>
+<div class="figure align-right" id="id3">
+<a class="reference internal image-reference" href="_images/line_settings.png"><img alt="_images/line_settings.png" src="_images/line_settings.png" style="width: 250.5px; height: 135.0px;" /></a>
+<p class="caption"><span class="caption-text">Line Settings Window</span></p>
 </div>
+<dl class="docutils">
+<dt>Lines offer the user another method of illustrating non-scalar data besides vector fields. The user can specify:</dt>
+<dd><ul class="first last simple">
+<li>Line quantity (eg. b)</li>
+<li>Line density in the X and Y directions</li>
+<li>Line color</li>
+<li>Arrow style and size</li>
+</ul>
+</dd>
+</dl>
+</div>
+<hr class="docutils" />
 <div class="section" id="contour">
-<h3>3. Contour<a class="headerlink" href="#contour" title="Permalink to this headline">¶</a></h3>
+<h4>3. Contour<a class="headerlink" href="#contour" title="Permalink to this headline">¶</a></h4>
 </div>
 <div class="section" id="additional-display-features">
-<h3>4. Additional Display Features<a class="headerlink" href="#additional-display-features" title="Permalink to this headline">¶</a></h3>
-</div>
+<h4>4. Additional Display Features<a class="headerlink" href="#additional-display-features" title="Permalink to this headline">¶</a></h4>
 </div>
 <div class="section" id="movies-and-animation">
-<h2>Movies and Animation<a class="headerlink" href="#movies-and-animation" title="Permalink to this headline">¶</a></h2>
+<h4>5. Movies and Animation<a class="headerlink" href="#movies-and-animation" title="Permalink to this headline">¶</a></h4>
+</div>
+</div>
 </div>
 </div>
 
