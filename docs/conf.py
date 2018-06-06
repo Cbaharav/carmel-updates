@@ -35,10 +35,7 @@ import sphinx_rtd_theme
 # import os
 # from docutils.parsers.rst import Directive, directives
 # sys.path.append(os.path.abspath('sphinxext'))
-extensions = [
-    'sphinx.ext.viewcode',
-    'nbsphinx',
-    'sphinx.ext.mathjax']
+extensions = ['sphinx.ext.viewcode']
 # only need this section to work on machine:
 # extensions = ['sphinx.ext.viewcode', 
 #               'IPython.sphinxext.ipython_console_highlighting',
@@ -81,7 +78,7 @@ language = None
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This patterns also effect to html_static_path and html_extra_path
-exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', '**.ipynb_checkpoints']
+exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'sphinx'
