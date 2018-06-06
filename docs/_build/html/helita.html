@@ -166,13 +166,30 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="helita">
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="helita">
 <h1>helita<a class="headerlink" href="#helita" title="Permalink to this headline">¶</a></h1>
-<p>Helita documentation can be found here:</p>
+<p>Helita documentation can be found here (this section is taken from this link):</p>
 <p><a class="reference external" href="http://helita.readthedocs.io/en/latest/index.html">http://helita.readthedocs.io/en/latest/index.html</a></p>
-<p>This section is taken directly from the link above.</p>
-<p>Helita is a Python library for solar physics focused on interfacing with code and projects from the <a class="reference external" href="http://astro.uio.no">Institute of Theoretical Astrophysics</a> (ITA) at the <a class="reference external" href="https://www.uio.no">University of Oslo</a>. The name comes from Helios + ITA.</p>
-<p>Currently, the library is a loose collection of different scripts and classes with varying degrees of portability and usefulness.</p>
+<p>Helita is a Python library for solar physics focused on interfacing with code and projects from the <a class="reference external" href="http://astro.uio.no">Institute of Theoretical Astrophysics</a> (ITA) at the <a class="reference external" href="https://www.uio.no">University of Oslo</a>. The name comes from Helios + ITA. Currently, the library is a loose collection of different scripts and classes with varying degrees of portability and usefulness.</p>
 <div class="section" id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="pre-requisites">
@@ -193,8 +210,7 @@
 <li><a class="reference external" href="http://pandas.pydata.org">pandas</a></li>
 <li><a class="reference external" href="https://www.crummy.com/software/BeautifulSoup/">beautifulsoup4</a></li>
 </ul>
-<p>Helita will install without the above packages, but functionality will be limited.</p>
-<p>All of the above packages are available through Anaconda, and that is the recommended way of setting up your Python distribution.</p>
+<p>Helita will install without the above packages, but functionality will be limited. All of these packages are available through Anaconda, and that is the recommended way of setting up your Python distribution.</p>
 </div>
 <div class="section" id="cloning-git-repository">
 <h3>Cloning git repository<a class="headerlink" href="#cloning-git-repository" title="Permalink to this headline">¶</a></h3>
@@ -329,6 +345,7 @@ $ python setup.py install
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

@@ -1,15 +1,11 @@
 ******
 helita
 ******
-Helita documentation can be found here:
+Helita documentation can be found here (this section is taken from this link):
 
 http://helita.readthedocs.io/en/latest/index.html
 
-This section is taken directly from the link above.
-
-Helita is a Python library for solar physics focused on interfacing with code and projects from the `Institute of Theoretical Astrophysics <http://astro.uio.no>`_ (ITA) at the `University of Oslo <https://www.uio.no>`_. The name comes from Helios + ITA.
-
-Currently, the library is a loose collection of different scripts and classes with varying degrees of portability and usefulness.
+Helita is a Python library for solar physics focused on interfacing with code and projects from the `Institute of Theoretical Astrophysics <http://astro.uio.no>`_ (ITA) at the `University of Oslo <https://www.uio.no>`_. The name comes from Helios + ITA. Currently, the library is a loose collection of different scripts and classes with varying degrees of portability and usefulness.
 
 Installation
 ============
@@ -32,9 +28,7 @@ In addition, the following packages are also recommended to take advantage of al
 * `pandas <http://pandas.pydata.org>`_
 * `beautifulsoup4 <https://www.crummy.com/software/BeautifulSoup/>`_
 
-Helita will install without the above packages, but functionality will be limited.
-
-All of the above packages are available through Anaconda, and that is the recommended way of setting up your Python distribution.
+Helita will install without the above packages, but functionality will be limited. All of these packages are available through Anaconda, and that is the recommended way of setting up your Python distribution.
 
 Cloning git repository
 ----------------------
