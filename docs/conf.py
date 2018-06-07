@@ -48,7 +48,7 @@ import sphinx_rtd_theme
 # MOCK_MODULES = ['IPython.sphinxext.ipython_console_highlighting', 'IPython.sphinxext.ipython_directive']
 # sys.modules.update((mod_name, Mock()) for mod_name in MOCK_MODULES)
 import sys, os
-sys.path.append(os.path.abspath('anaconda/lib/python3.6/site-packages/IPython'))
+sys.path.append('/Users/baharav/anaconda/lib/python3.6/site-packages/IPython')
 import IPython.sphinxext.ipython_console_highlighting
 import IPython.sphinxext.ipython_directive
 
