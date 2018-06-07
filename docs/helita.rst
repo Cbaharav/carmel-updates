@@ -94,7 +94,7 @@ FFTData Class
 -------------
 This class can be found within bifrost_fft.py. It performs operations on Bifrost simulation data in its native format. After creating a class for a specific snap root name and directory (much like with BifrostData), one can get a dictionary of the frequency and amplitude of the Fourier Transform for a certain quantity over a range of snapshots.
 
-.. ipython::
+#.. ipython::
 	
 	In [1]: x = 2
 

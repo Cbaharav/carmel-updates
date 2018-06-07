@@ -257,17 +257,16 @@ $ python setup.py install
 <div class="section" id="fftdata-class">
 <h3>FFTData Class<a class="headerlink" href="#fftdata-class" title="Permalink to this headline">¶</a></h3>
 <p>This class can be found within bifrost_fft.py. It performs operations on Bifrost simulation data in its native format. After creating a class for a specific snap root name and directory (much like with BifrostData), one can get a dictionary of the frequency and amplitude of the Fourier Transform for a certain quantity over a range of snapshots.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">x</span> <span class="o">=</span> <span class="mi">2</span>
+<p>#.. ipython:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">2</span>
 
-<span class="gp">In [2]: </span><span class="kn">from</span> <span class="nn">helita.sim</span> <span class="kn">import</span> <span class="n">bifrost_fft</span> <span class="k">as</span> <span class="n">brft</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="kn">from</span> <span class="nn">helita.sim</span> <span class="k">import</span> <span class="n">bifrost_fft</span> <span class="k">as</span> <span class="n">brft</span>
 
-<span class="gp">In [3]: </span><span class="n">dd</span> <span class="o">=</span> <span class="n">brft</span><span class="o">.</span><span class="n">FFTData</span><span class="p">(</span><span class="n">file_root</span> <span class="o">=</span> <span class="s1">&#39;cb10f&#39;</span><span class="p">,</span> <span class="n">fdir</span> <span class="o">=</span> <span class="s1">&#39;/net/opal/Volumes/Amnesia/mpi3drun/Granflux&#39;</span><span class="p">)</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">dd</span> <span class="o">=</span> <span class="n">brft</span><span class="o">.</span><span class="n">FFTData</span><span class="p">(</span><span class="n">file_root</span> <span class="o">=</span> <span class="s1">&#39;cb10f&#39;</span><span class="p">,</span> <span class="n">fdir</span> <span class="o">=</span> <span class="s1">&#39;/net/opal/Volumes/Amnesia/mpi3drun/Granflux&#39;</span><span class="p">)</span>
 
-<span class="gp">In [4]: </span><span class="n">transformed</span> <span class="o">=</span> <span class="n">dd</span><span class="o">.</span><span class="n">get_fft</span><span class="p">(</span><span class="s1">&#39;ux&#39;</span><span class="p">,</span> <span class="n">snap</span> <span class="o">=</span> <span class="p">[</span><span class="mi">430</span><span class="p">,</span> <span class="mi">431</span><span class="p">,</span> <span class="mi">432</span><span class="p">,</span> <span class="mi">433</span><span class="p">])</span>
-<span class="go">(512, 512, 544, 4)</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="n">transformed</span> <span class="o">=</span> <span class="n">dd</span><span class="o">.</span><span class="n">get_fft</span><span class="p">(</span><span class="s1">&#39;ux&#39;</span><span class="p">,</span> <span class="n">snap</span> <span class="o">=</span> <span class="p">[</span><span class="mi">430</span><span class="p">,</span> <span class="mi">431</span><span class="p">,</span> <span class="mi">432</span><span class="p">,</span> <span class="mi">433</span><span class="p">])</span>
 
-<span class="gp">In [5]: </span><span class="n">transformed</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
-<span class="go">                   Out[5]: dict_keys([&#39;freq&#39;, &#39;ftCube&#39;])</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="n">transformed</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
