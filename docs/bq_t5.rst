@@ -132,6 +132,13 @@ Animation features:
 	* Animation will loop until paused
 
 Movie features:
-	* File destination (default is hoome directory)
+	* File destination (default is home directory)
 	* Frames per second
 	* Whether pictures should be saved or removed (the movie is created from saved pictures)
+
+.. raw:: html 
+
+   <video controls = 'true' width = '100%' height = '100%'>
+   <source src='_static/tester.mp4' type = 'video/mp4'>
+   </video> 
+
