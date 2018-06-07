@@ -47,11 +47,13 @@ import sphinx_rtd_theme
 
 # MOCK_MODULES = ['IPython.sphinxext.ipython_console_highlighting', 'IPython.sphinxext.ipython_directive']
 # sys.modules.update((mod_name, Mock()) for mod_name in MOCK_MODULES)
+import sys, os
+sys.path.append(os.path.abspath('IPython.sphinxext'))
 
 extensions = ['sphinx.ext.viewcode', 
               'IPython.sphinxext.ipython_console_highlighting',
               'IPython.sphinxext.ipython_directive']
-              
+
 # ipython_mplbackend = None
 # Sphinx.add_directive('ipython', IPythonDirective)               
 
