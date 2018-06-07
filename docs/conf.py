@@ -38,7 +38,7 @@ import sphinx_rtd_theme
 # extensions = ['sphinx.ext.viewcode']
 # only need this section to work on machine:
 import sys
-from unittest.mock import MagicMock
+from mock import Mock as MagicMock
 
 class Mock(MagicMock):
     @classmethod
