@@ -37,16 +37,16 @@ import sphinx_rtd_theme
 # sys.path.append(os.path.abspath('sphinxext'))
 # extensions = ['sphinx.ext.viewcode']
 # only need this section to work on machine:
-# import sys
-# from mock import Mock as MagicMock
+import sys
+from unittest.mock import MagicMock
 
-# class Mock(MagicMock):
-#     @classmethod
-#     def __getattr__(cls, name):
-#         return MagicMock()
+class Mock(MagicMock):
+    @classmethod
+    def __getattr__(cls, name):
+        return MagicMock()
 
-# MOCK_MODULES = ['IPython.sphinxext.ipython_console_highlighting', 'IPython.sphinxext.ipython_directive']
-# sys.modules.update((mod_name, Mock()) for mod_name in MOCK_MODULES)
+MOCK_MODULES = ['IPython.sphinxext.ipython_console_highlighting', 'IPython.sphinxext.ipython_directive']
+sys.modules.update((mod_name, Mock()) for mod_name in MOCK_MODULES)
 
 extensions = ['sphinx.ext.viewcode', 
               'IPython.sphinxext.ipython_console_highlighting',
