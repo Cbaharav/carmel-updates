@@ -21,18 +21,17 @@
       		- added script & resulting plots
 		- will add axis labels & run on more snaps (top plot: freq vs amplitude with lines for different z values, bottom plot: freq vs z value with colors for amplitude)
 
+      [] Both test looks good, except that I would be nice if you add some comments 
+      of what is doing the different code lines. 
+
+      [] Question: Could you tell me what do you see in the simulation case?
+
 ## Style:
 
 
 ## Documentation:
 
     [] Fill README.md with information related to this library.
-
-    [x] Consider use github wiki for a more complete documentation
-      (at least for the bifrost.md). This can be found here
-      (https://github.com/Cbaharav/carmel-updates/wiki). This will allow
-      various sections. You may want to add some of information in the
-      poster you did for the AGU meeting. 
 
         #  wiki 
 	  [x] Great first step! you are fast... 
@@ -44,37 +43,48 @@
              know which other information you could add.
 	     	 [] Add new page about bifrost.py, i.e., things that one could do with import helita.sim.bifrost as br. 
 
+     # READOCS: 
+       - Good job! Impressive that you did everything from scratch. I may need some guidence. 
+       I also created my account. You can include me (same as my github jumasy). 
+       Defenetily I'll use this for the next intern this summer.
+
+       [] Right now you did most of the documentation, I hope Tiago (and of course I) will complete/add information there. 
+       so you could put as a list of contributors: i.e., for now By Carmel Baharav, Juan Martinez-Sykora & Tiago M. D. Pereira
+
+       [] Could you add a note that most of the most updated versions (and the functionality less reliable) done in bifrost.py, ebysus.py and 
+       and bifrost related are in https://github.com/jumasy/helita.git fork. 
+
+       [] Add that if iix, iiy or iiz is not specified it will read all the numerical domain along the x, y and/or z axis, respectively. 
+       
+       [] If you know how to get some keys, i.e., time, axis information, dz, dx, dy among others. Add those in the Getting Variables & Quantities
+
+       [] Add short list of variable available (computed and non computed). 
+
+       About bq_t5_tool
+       
+       [] Also useful for ebysus simulations. 
+
+       [] The Bifrost code is not publicly available yet, consequently the bq_t5_tool is not availeble neither. Make this clear. 
+
+       [] I could not play the movie...  
+       
+
 ## New code:
 
     [x] Layout looks nice!
     
     [] I think you forgot to commit your changes... I dont see a new update of the code. So, I can't test this...
 
-    [x] Reduce some empty space (leave at most one empty line). In addition, dont leave
-       the empty line between the description below each function. **reduced as much as possible, some required by pep8**
-
-       	   [autpep8 keeps on inserting double blank lines when I delete this one] There is still one case with double blank lines (line 21). 
-	   JMS Interesting. ...
-
-    [x] Add a definition of the following functions: singleCudaRun, linearTimeInterp, singleRun, threadTask
-
-    [x] test should be in test file not here. 
-
-       [x] I don't think you need test flag in get_fft since dd.preTransform and freq are already define. right?
-       		[x] note to self: issue- without test flag, get_fft doesn't change preTransform if running on the same FFTData object (regardless of whether snaps, slices, or quantity have changed)
-		- fixed by checking if snap is int, if not it is a test
-       	  
-
-     [x] self.freq should not be in linearTimeInterp instead in get_fft
-     
-          [x] I think it would be nice to have evenDt and evenTimes in self. Also important if 
-	  you move self.freq in get_fft. 
-	  
      [] Add spatial power spectrum functions in a similar way as you did for the time axis. 
      Please, come over my office I'll explain  in detail
 
-## Bifrost.py
+     	     [] Add fft for each axis
 
-    [x] Did you merged your bifrost.py with the one in Helita? If so, delete the one here. 
+     	     [] Add fft for cylindrical and sperical axis and integrated in angle. 
+
+	     [] Add a function that goes through time (for the space case) and in height (for the 
+	     temporal one) doing the average of the ffts. 
+    	     
+## Bifrost.py
 
     [] You may want to move bifrostdoc.md into my helita fork. Or even better, in the helita wiki. 
