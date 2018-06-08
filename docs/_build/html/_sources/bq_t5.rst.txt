@@ -23,11 +23,12 @@ To launch the tool, call::
  python path_to_file -i path_to_snapshot
 
 Possible extensions include:
-	* -i / --input: required, points to snapshot file
-	* -h / --help: returns help message
-	* -s / --slice: jumps directly to data[:, :, slice], defaults to 0
-	* -z / --depth: finds a slice at the corresponding depth value provided in real [mM] coordinates
-	* -e / --ebysus: code based on Bifrost
+
+-i, --input 		required, points to snapshot file
+-h, --help  		returns help message
+-s, --slice 		jumps directly to data[:, :, slice], defaults to 0
+-z, --depth 		finds a slice at the corresponding depth value provided in real [mM] coordinates
+-e, --ebysus 		code based on Bifrost
 
 Description
 ===========
