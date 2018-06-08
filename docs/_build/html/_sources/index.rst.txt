@@ -3,11 +3,11 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to bifrost.py's documentation!
-=======================================
+Welcome to helita and bifrost documentation!
+============================================
 .. only:: html
 
-   By Carmel Baharav, includes some previous documentation by Tiago M. D. Pereira.
+   By Carmel Baharav, Juan Martinez-Sykora & Tiago M. D. Pereira.
 
    Last updated on |today|.
 

@@ -12,14 +12,14 @@ Installation
 
 Pre-requisites
 --------------
-To make use of helita **you need a Fortran compiler** (`GFortran <https://gcc.gnu.org/wiki/GFortran>`_ is recommended), because some modules are compiled from Fortran. In addition, before attempting to install helita you need the following:
+To make use of helita **you need a Fortran compiler** (`GFortran <https://gcc.gnu.org/wiki/GFortran>`_ is recommended), because some modules are compiled from Fortran. Before attempting to install helita, you also need the following:
 
 * `Python (2.7.x, 3.4.x or later) <https://www.python.org>`_
 * `Astropy <http://www.astropy.org>`_
 * `NumPy <http://www.numpy.org>`_
 * `SciPy <https://www.scipy.org>`_
 
-In addition, the following packages are also recommended to take advantage of all the features:
+In addition, the following packages are recommended to take advantage of all the features:
 
 * `Matplotlib <https://matplotlib.org>`_
 * `h5py <http://www.h5py.org>`_
@@ -38,6 +38,9 @@ The easiest way is to use git to clone the repository. To grab the latest versio
 	$ cd helita
 	$ python setup.py install
   
+
+.. Note::
+	The majority of the most updated versions of bifrost.py, ebysus.py, and all things bifrost related are in the https://github.com/jumasy/helita.git fork.
 
 Non-root install
 ----------------
@@ -84,11 +87,63 @@ The snapshot(s) being read can be defined when creating the object, or set/chang
 
 Getting Variables & Quantities
 ------------------------------
-get_var and get_varTime can be used to read variables as well as to calculate quantities (with a call to _get_quantity). iix, iiy, and iiz can be specified to slice the return array (they can be ints, arrays, or lists). If no snapshot is specified, the current snap value will be used (either the initialized one, which is the first in the series, or the most recent snap used in set_snap or in a call to get_var). To get variable 'r' at snap 430 with only values at y = 200, z = 5, and z = 7::
+get_var and get_varTime can be used to read variables as well as to calculate quantities (with a call to _get_quantity). iix, iiy, and iiz can be specified to slice the return array (they can be ints, arrays, or lists). If iix, iiy, or iiz is not specified, get_var will read all the numerical domain along the x, y, or z axis, respectively. If no snapshot is specified, the current snap value will be used (either the initialized one, which is the first in the series, or the most recent snap used in set_snap or in a call to get_var). To get variable 'r' at snap 430 with only values at y = 200, z = 5, and z = 7::
 
 	var1 = dd.get_var('r', snap = 430, iiy = 200, iiz = [5, 7])
 
 get_varTime can be used in the same fashion, with the added option of reading a specific variable or quantity from many snapshots at once. Its return arrays have an added dimension for time.
+
+Several of the class's parameters can be found in the dictionary *params*. This dictionary contains information about time (t and dt) and the axes (dx, dy, dz) among other things. When snap contains more than one snapshot, many of the parameters in the dictionary contain one entry for each snap. To get time::
+
+	time = dd.params['t']
+
+To view all available keys::
+
+	dd.params.keys()
+
+.. list-table:: Variables
+	:stub-columns: 1
+
+	* - Simple
+	  - r, px, py, pz, e, bx, by, bz, p, tg, i1, i4, qjoule, qspitz
+	* - Composite
+	  - ux, uy, uz, ee, s
+
+.. list-table:: Calculated Quantities
+	:stub-columns: 1
+
+	* - Derivatives
+	  - dxup, dyup, dzup, dxdn, dydn, dzdn
+	* - Centers vector quantity in cells
+	  - xc, yc, zc
+	* - Module of vector
+	  - 'mod' + root letter of varname (eg. modb)
+	* - Divergence of vector
+	  - 'div' + root letter of varname (eg. divb)
+	* - Squared module
+	  - root letter of varname + '2' (eg. u2)
+	* - Ratio of two vars
+	  - var1 + 'rat' + var2 (eg. rratpx)
+	* - Eostab (unit conversion to SI)
+	  - ne, tg, pg, kr, eps, opa, temt
+	* - Magnitude of vector components // or ⟂
+	  - root letter of v1 + 'par' or 'per' + root letter of v2 (eg. uparb)
+	* - Current
+	  - ix, iy, iz, wx, wy, wz
+	* - Flux
+	  - pfx, pfy, pfz, pfex, pfey, pfez, pfwx
+	* - Plasma
+	  - beta, va, cs, s, ke, mn, man, hp, vax, vay, hx, hy, hz, kx, ky, kz
+	* - Wave forces
+	  - alf, fast, long
+
+.. +-----------+-----------+
+.. | Variables | Simple	|
+.. |           |			|
+.. |			+-----------+
+.. |           | Composite	|
+.. |						|
+.. +-----------+-----------+
 
 FFTData Class
 -------------

@@ -1,7 +1,7 @@
 ***************
 bq_t5_look Tool
 ***************
-This tool can be used to visualize and manipulate data sets produced by Bifrost simulations. Previous tools were written in IDL, but this tool is written in Python, increasing accessibility. It also has a range of added features including the creation of movies and animations.
+This tool can be used to visualize and manipulate data sets produced by Bifrost (and Ebysus) simulations. Previous tools were written in IDL, but this tool is written in Python, increasing accessibility. It also has a range of added features including the creation of movies and animations.
 
 .. figure:: AGU_poster.png
 
@@ -9,8 +9,11 @@ This tool can be used to visualize and manipulate data sets produced by Bifrost 
 
 Setup
 =====
-**I'm not sure how people would get access to Bifrost, is it on github?**
+.. Note::
+	The Bifrost code, which includes this tool is **not** publicly available yet.
+
 This tool can be found in Bifrost (which is a separate folder from helita), and requires that helita be installed in order to function. Once you have created a path for the Bifrost folder, add that path to your .cshrc, eg::
+
 	setenv BIFROSTPATH yourpath
 
 Launch
@@ -138,7 +141,5 @@ Movie features:
 
 .. raw:: html 
 
-   <video controls = 'true' width = '100%' height = '100%'>
-   <source src='_static/tester.mp4' type = 'video/mp4'>
-   </video> 
+   <iframe src="https://drive.google.com/file/d/1Lr3YEF8jLUpmibr2tVVWmokNSXxeNAKx/preview" width="640" height="480"></iframe>
 
