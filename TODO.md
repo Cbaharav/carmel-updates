@@ -23,6 +23,7 @@
       of what is doing the different code lines. 
 
       [] Question: Could you tell me what do you see in the simulation case?
+      	- I think so, I have to go for today but I'll add on to this next time :)
       
 
 ## Style:
