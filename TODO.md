@@ -15,16 +15,15 @@
       	 the test that you are doing for the various waves where the 
 	 result must be 1 or 0. 
 
-      [partial x] Add real test, i.e., from one simulation that shows a map of height, i.e., z axis vs 
+      [x] Add real test, i.e., from one simulation that shows a map of height, i.e., z axis vs 
       frequency where you do average of the FFT in x and y. This might be included as a new
       function (without the plot.imshow()) in the code.
-      		- added script & resulting plots
-		- will add axis labels & run on more snaps (top plot: freq vs amplitude with lines for different z values, bottom plot: freq vs z value with colors for amplitude)
 
-      [] Both test looks good, except that I would be nice if you add some comments 
+      [x] Both test looks good, except that I would be nice if you add some comments 
       of what is doing the different code lines. 
 
       [] Question: Could you tell me what do you see in the simulation case?
+      
 
 ## Style:
 
@@ -67,7 +66,8 @@
        [x] The Bifrost code is not publicly available yet, consequently the bq_t5_tool is not availeble neither. Make this clear. 
 
        [x] I could not play the movie...  
- 		- should be fixed now (hopefully)      
+ 		- should be fixed now (hopefully)
+		- let me know if there's any specific variable/setup (like data min/max instead of image min/max) that I should use for the movie instead of the current one
 
 ## New code:
 
