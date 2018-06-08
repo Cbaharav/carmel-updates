@@ -11,7 +11,7 @@ x = np.linspace(-np.pi, np.pi, 201)
 dd.preTransform = np.sin(8 *x)
 dd.freq = np.fft.fftshift(np.fft.fftfreq(np.size(x)))
 dd.run_gpu(False)
-tester = dd.get_fft('not a real snap', snap = 0)
+tester = dd.get_tfft('not a real var', snap = 'test')
 fig = plt.figure()
 
 numC = 3
@@ -39,7 +39,7 @@ ax2.set_xlim(-25, 25)
 ax2.set_title('gaussian curve')
 
 dd.freq = np.fft.fftshift(np.fft.fftfreq(np.size(x)))
-ft = dd.get_fft('fake snap', snap = 0)
+ft = dd.get_tfft('not a real var', snap = 'test')
 ax3 = fig.add_subplot(numC, numR, 4)
 ax3.plot(ft['freq'], ft['ftCube'])
 ax3.set_xlim(-.03, .03)
@@ -52,11 +52,9 @@ ax4.plot(x, dd.preTransform)
 ax4.set_title('y = 0')
 
 dd.freq = np.fft.fftshift(np.fft.fftfreq(np.size(x)))
-ft = dd.get_fft('fake snap', snap = 0)
+ft = dd.get_tfft('not a real var', snap = 'test')
 ax5 = fig.add_subplot(numC, numR, 6)
-# print(ft)
-# print(np.max(ft['ftCube']))
-# print(np.where(ft['ftCube'] == np.max(ft['ftCube'])))
+
 ax5.plot(ft['freq'], ft['ftCube'])
 ax5.set_title('ft of y = 0')
 
