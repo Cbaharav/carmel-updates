@@ -7,6 +7,8 @@ http://helita.readthedocs.io/en/latest/index.html
 
 Helita is a Python library for solar physics focused on interfacing with code and projects from the `Institute of Theoretical Astrophysics <http://astro.uio.no>`_ (ITA) at the `University of Oslo <https://www.uio.no>`_. The name comes from Helios + ITA. Currently, the library is a loose collection of different scripts and classes with varying degrees of portability and usefulness.
 
+=====
+
 Installation
 ============
 
