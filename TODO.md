@@ -48,26 +48,26 @@
        I also created my account. You can include me (same as my github jumasy). 
        Defenetily I'll use this for the next intern this summer.
 
-       [] Right now you did most of the documentation, I hope Tiago (and of course I) will complete/add information there. 
+       [x] Right now you did most of the documentation, I hope Tiago (and of course I) will complete/add information there. 
        so you could put as a list of contributors: i.e., for now By Carmel Baharav, Juan Martinez-Sykora & Tiago M. D. Pereira
 
-       [] Could you add a note that most of the most updated versions (and the functionality less reliable) done in bifrost.py, ebysus.py and 
+       [x] Could you add a note that most of the most updated versions (and the functionality less reliable) done in bifrost.py, ebysus.py and 
        and bifrost related are in https://github.com/jumasy/helita.git fork. 
 
-       [] Add that if iix, iiy or iiz is not specified it will read all the numerical domain along the x, y and/or z axis, respectively. 
+       [x] Add that if iix, iiy or iiz is not specified it will read all the numerical domain along the x, y and/or z axis, respectively. 
        
-       [] If you know how to get some keys, i.e., time, axis information, dz, dx, dy among others. Add those in the Getting Variables & Quantities
+       [x] If you know how to get some keys, i.e., time, axis information, dz, dx, dy among others. Add those in the Getting Variables & Quantities
 
-       [] Add short list of variable available (computed and non computed). 
+       [x] Add short list of variable available (computed and non computed). 
 
        About bq_t5_tool
        
-       [] Also useful for ebysus simulations. 
+       [x] Also useful for ebysus simulations. 
 
-       [] The Bifrost code is not publicly available yet, consequently the bq_t5_tool is not availeble neither. Make this clear. 
+       [x] The Bifrost code is not publicly available yet, consequently the bq_t5_tool is not availeble neither. Make this clear. 
 
-       [] I could not play the movie...  
-       
+       [x] I could not play the movie...  
+ 		- should be fixed now (hopefully)      
 
 ## New code:
 
