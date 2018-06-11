@@ -18,3 +18,4 @@ Contents:
 
    helita.rst
    bq_t5.rst
+   FFTData_demo.ipynb
