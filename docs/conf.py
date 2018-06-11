@@ -35,7 +35,9 @@ import sphinx_rtd_theme
 # import os
 # from docutils.parsers.rst import Directive, directives
 # sys.path.append(os.path.abspath('sphinxext'))
-extensions = ['sphinx.ext.viewcode']
+extensions = ['sphinx.ext.viewcode',
+			   'nbsphinx',
+			   'sphinx.ext.mathjax']
 # only need this section to work on machine:
 # import sys
 # from unittest.mock import MagicMock
@@ -96,7 +98,7 @@ language = None
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This patterns also effect to html_static_path and html_extra_path
-exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
+exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', '**.ipynb_checkpoints']
 
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'sphinx'

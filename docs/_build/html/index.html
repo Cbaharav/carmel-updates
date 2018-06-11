@@ -149,10 +149,29 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="welcome-to-helita-and-bifrost-documentation">
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="welcome-to-helita-and-bifrost-documentation">
 <h1>Welcome to helita and bifrost documentation!<a class="headerlink" href="#welcome-to-helita-and-bifrost-documentation" title="Permalink to this headline">¶</a></h1>
 <p>By Carmel Baharav, Juan Martinez-Sykora &amp; Tiago M. D. Pereira.</p>
-<p>Last updated on Jun 08, 2018.</p>
+<p>Last updated on Jun 11, 2018.</p>
 <p>Contents:</p>
 <div class="toctree-wrapper compound">
 <ul>
@@ -238,6 +257,7 @@
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
