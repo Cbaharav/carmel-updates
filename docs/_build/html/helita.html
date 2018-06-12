@@ -85,24 +85,23 @@
             
               <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">helita</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#pre-requisites">Pre-requisites</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#cloning-git-repository">Cloning git repository</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#non-root-install">Non-root install</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#developer-install">Developer install</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#installing-with-different-c-or-fortran-compilers">Installing with different C or Fortran compilers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Pre-requisites">Pre-requisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Cloning-git-repository">Cloning git repository</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Non-root-install">Non-root install</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Developer-install">Developer install</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Installing-with-different-C-or-Fortran-compilers">Installing with different C or Fortran compilers</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#bifrost-py">bifrost.py</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#bifrostdata-class">BifrostData Class</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#getting-variables-quantities">Getting Variables &amp; Quantities</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#fftdata-class">FFTData Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bifrost.py">bifrost.py</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#BifrostData-Class">BifrostData Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Getting-Variables-&amp;-Quantities">Getting Variables &amp; Quantities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#FFTData-Class">FFTData Class</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="bq_t5.html">bq_t5_look Tool</a></li>
-<li class="toctree-l1"><a class="reference internal" href="FFTData_demo.html">FFT Data Demo</a></li>
 </ul>
 
             
@@ -154,7 +153,7 @@
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/helita.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/helita.ipynb.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -169,6 +168,170 @@
             
   
 <style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput,
+div.nbinput div.prompt,
+div.nbinput div.input_area,
+div.nbinput div[class*=highlight],
+div.nbinput div[class*=highlight] pre,
+div.nboutput,
+div.nbinput div.prompt,
+div.nbinput div.output_area,
+div.nboutput div[class*=highlight],
+div.nboutput div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput,
+div.nboutput {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput,
+    div.nboutput {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput div.prompt pre {
+    color: #303F9F;
+}
+
+/* output prompt */
+div.nboutput div.prompt pre {
+    color: #D84315;
+}
+
+/* all prompts */
+div.nbinput div.prompt,
+div.nboutput div.prompt {
+    min-width: 8ex;
+    padding-top: 0.4em;
+    padding-right: 0.4em;
+    text-align: right;
+    flex: 0;
+}
+@media (max-width: 540px) {
+    div.nbinput div.prompt,
+    div.nboutput div.prompt {
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput div.prompt.empty {
+        padding: 0;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput div.prompt pre,
+div.nboutput div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput div.input_area,
+div.nboutput div.output_area {
+    padding: 0.4em;
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput div.input_area,
+    div.nboutput div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput div.input_area {
+    border: 1px solid #cfcfcf;
+    border-radius: 2px;
+    background: #f7f7f7;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.pngmath center alignment in output cells */
+div.nboutput div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
 /* CSS overrides for sphinx_rtd_theme */
 
 /* 24px margin */
@@ -192,10 +355,10 @@
 <p><a class="reference external" href="http://helita.readthedocs.io/en/latest/index.html">http://helita.readthedocs.io/en/latest/index.html</a></p>
 <p>Helita is a Python library for solar physics focused on interfacing with code and projects from the <a class="reference external" href="http://astro.uio.no">Institute of Theoretical Astrophysics</a> (ITA) at the <a class="reference external" href="https://www.uio.no">University of Oslo</a>. The name comes from Helios + ITA. Currently, the library is a loose collection of different scripts and classes with varying degrees of portability and usefulness.</p>
 <hr class="docutils" />
-<div class="section" id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="pre-requisites">
-<h3>Pre-requisites<a class="headerlink" href="#pre-requisites" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="Installation">
+<h2>Installation<a class="headerlink" href="#Installation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="Pre-requisites">
+<h3>Pre-requisites<a class="headerlink" href="#Pre-requisites" title="Permalink to this headline">¶</a></h3>
 <p>To make use of helita <strong>you need a Fortran compiler</strong> (<a class="reference external" href="https://gcc.gnu.org/wiki/GFortran">GFortran</a> is recommended), because some modules are compiled from Fortran. Before attempting to install helita, you also need the following:</p>
 <ul class="simple">
 <li><a class="reference external" href="https://www.python.org">Python (2.7.x, 3.4.x or later)</a></li>
@@ -214,8 +377,8 @@
 </ul>
 <p>Helita will install without the above packages, but functionality will be limited. All of these packages are available through Anaconda, and that is the recommended way of setting up your Python distribution.</p>
 </div>
-<div class="section" id="cloning-git-repository">
-<h3>Cloning git repository<a class="headerlink" href="#cloning-git-repository" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="Cloning-git-repository">
+<h3>Cloning git repository<a class="headerlink" href="#Cloning-git-repository" title="Permalink to this headline">¶</a></h3>
 <p>The easiest way is to use git to clone the repository. To grab the latest version of helita and install it:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/ITA-solar/helita.git
 $ cd helita
@@ -227,16 +390,16 @@ $ python setup.py install
 <p class="last">The majority of the most updated versions of bifrost.py, ebysus.py, and all things bifrost related are in the <a class="reference external" href="https://github.com/jumasy/helita.git">https://github.com/jumasy/helita.git</a> fork.</p>
 </div>
 </div>
-<div class="section" id="non-root-install">
-<h3>Non-root install<a class="headerlink" href="#non-root-install" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="Non-root-install">
+<h3>Non-root install<a class="headerlink" href="#Non-root-install" title="Permalink to this headline">¶</a></h3>
 <p>If you don’t have write permission to your Python packages directory, use the following option with setup.py:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python setup.py install --user
 </pre></div>
 </div>
 <p>This will install helita under your home directory (typically ~/.local)</p>
 </div>
-<div class="section" id="developer-install">
-<h3>Developer install<a class="headerlink" href="#developer-install" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="Developer-install">
+<h3>Developer install<a class="headerlink" href="#Developer-install" title="Permalink to this headline">¶</a></h3>
 <p>If you want to install helita but also actively change the code or contribute to its development, it is recommended that you do a developer install instead:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python setup.py develop
 </pre></div>
@@ -246,8 +409,8 @@ $ python setup.py install
 </pre></div>
 </div>
 </div>
-<div class="section" id="installing-with-different-c-or-fortran-compilers">
-<h3>Installing with different C or Fortran compilers<a class="headerlink" href="#installing-with-different-c-or-fortran-compilers" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="Installing-with-different-C-or-Fortran-compilers">
+<h3>Installing with different C or Fortran compilers<a class="headerlink" href="#Installing-with-different-C-or-Fortran-compilers" title="Permalink to this headline">¶</a></h3>
 <p>The procedure above will compile the C and Fortran modules using the default gcc/gfortran compilers. It will fail if these are not available in the system. If you want to use a different compiler, please use <em>setup.py</em> with the <em>-compiler=xxx</em> and/or <em>-fcompiler=yyy</em> options, where <em>xxx</em>, <em>yyy</em> are C and Fortran compiler families (names depend on system). To check which Fortran compilers are available in your system, you can run:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python setup.py build --help-fcompiler
 </pre></div>
@@ -259,11 +422,11 @@ $ python setup.py install
 </div>
 </div>
 <hr class="docutils" />
-<div class="section" id="bifrost-py">
-<h2>bifrost.py<a class="headerlink" href="#bifrost-py" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="bifrost.py">
+<h2>bifrost.py<a class="headerlink" href="#bifrost.py" title="Permalink to this headline">¶</a></h2>
 <p>bifrost.py is a set of tools to read and interact with output from Bifrost simulations.</p>
-<div class="section" id="bifrostdata-class">
-<h3>BifrostData Class<a class="headerlink" href="#bifrostdata-class" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="BifrostData-Class">
+<h3>BifrostData Class<a class="headerlink" href="#BifrostData-Class" title="Permalink to this headline">¶</a></h3>
 <p>bifrost.py includes the BifrostData class (among others). The following allows to create the class for snapshot number 430 from simulation ‘cb10f’ from directory ‘/net/opal/Volumes/Amnesia/mpi3drun/Granflux’:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">helita.sim</span> <span class="k">import</span> <span class="n">bifrost</span> <span class="k">as</span> <span class="n">br</span>
 <span class="n">dd</span> <span class="o">=</span> <span class="n">br</span><span class="o">.</span><span class="n">BifrostData</span><span class="p">(</span><span class="s1">&#39;cb10f&#39;</span><span class="p">,</span> <span class="n">snap</span> <span class="o">=</span> <span class="mi">430</span><span class="p">,</span> <span class="n">fdir</span> <span class="o">=</span> <span class="s1">&#39;/net/opal/Volumes/Amnesia/mpi3drun/Granflux&#39;</span><span class="p">)</span>
@@ -271,8 +434,8 @@ $ python setup.py install
 </div>
 <p>The snapshot(s) being read can be defined when creating the object, or set/changed anytime later. Snaps can be ints, arrays, or lists.</p>
 </div>
-<div class="section" id="getting-variables-quantities">
-<h3>Getting Variables &amp; Quantities<a class="headerlink" href="#getting-variables-quantities" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="Getting-Variables-&amp;-Quantities">
+<h3>Getting Variables &amp; Quantities<a class="headerlink" href="#Getting-Variables-&-Quantities" title="Permalink to this headline">¶</a></h3>
 <p>get_var and get_varTime can be used to read variables as well as to calculate quantities (with a call to _get_quantity). iix, iiy, and iiz can be specified to slice the return array (they can be ints, arrays, or lists). If iix, iiy, or iiz is not specified, get_var will read all the numerical domain along the x, y, or z axis, respectively. If no snapshot is specified, the current snap value will be used (either the initialized one, which is the first in the series, or the most recent snap used in set_snap or in a call to get_var). To get variable ‘r’ at snap 430 with only values at y = 200, z = 5, and z = 7:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">var1</span> <span class="o">=</span> <span class="n">dd</span><span class="o">.</span><span class="n">get_var</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">snap</span> <span class="o">=</span> <span class="mi">430</span><span class="p">,</span> <span class="n">iiy</span> <span class="o">=</span> <span class="mi">200</span><span class="p">,</span> <span class="n">iiz</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">])</span>
 </pre></div>
@@ -347,18 +510,66 @@ $ python setup.py install
 </tbody>
 </table>
 </div>
-<div class="section" id="fftdata-class">
-<h3>FFTData Class<a class="headerlink" href="#fftdata-class" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="FFTData-Class">
+<h3>FFTData Class<a class="headerlink" href="#FFTData-Class" title="Permalink to this headline">¶</a></h3>
 <p>This class can be found within bifrost_fft.py. It performs operations on Bifrost simulation data in its native format. After creating a class for a specific snap root name and directory (much like with BifrostData), one can get a dictionary of the frequency and amplitude of the Fourier Transform for a certain quantity over a range of snapshots.</p>
-<p>#.. ipython:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="kn">from</span> <span class="nn">helita.sim</span> <span class="k">import</span> <span class="n">bifrost_fft</span> <span class="k">as</span> <span class="n">brft</span>
-
-<span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">dd</span> <span class="o">=</span> <span class="n">brft</span><span class="o">.</span><span class="n">FFTData</span><span class="p">(</span><span class="n">file_root</span> <span class="o">=</span> <span class="s1">&#39;cb10f&#39;</span><span class="p">,</span> <span class="n">fdir</span> <span class="o">=</span> <span class="s1">&#39;/net/opal/Volumes/Amnesia/mpi3drun/Granflux&#39;</span><span class="p">)</span>
-
-<span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">transformed</span> <span class="o">=</span> <span class="n">dd</span><span class="o">.</span><span class="n">get_tfft</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">snap</span> <span class="o">=</span> <span class="p">[</span><span class="mi">430</span><span class="p">,</span> <span class="mi">431</span><span class="p">,</span> <span class="mi">432</span><span class="p">],</span> <span class="n">iiy</span> <span class="o">=</span> <span class="mi">20</span><span class="p">)</span>
-
-<span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="n">transformed</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [11]:
 </pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>from helita.sim import bifrost_fft as brft
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>dd = brft.FFTData(file_root = &#39;cb10f&#39;, fdir = &#39;/net/opal/Volumes/Amnesia/mpi3drun/Granflux&#39;)
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>transformed = dd.get_tfft(&#39;r&#39;, snap = [430, 431, 432], iiy = 20)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(512, 544, 3)
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>transformed.keys()
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[14]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>dict_keys([&#39;freq&#39;, &#39;ftCube&#39;])
+</pre></div>
+</div>
 </div>
 </div>
 </div>

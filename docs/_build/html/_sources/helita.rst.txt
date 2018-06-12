@@ -139,13 +139,6 @@ To view all available keys::
 	* - Wave forces
 	  - alf, fast, long
 
-.. +-----------+-----------+
-.. | Variables | Simple	|
-.. |           |			|
-.. |			+-----------+
-.. |           | Composite	|
-.. |						|
-.. +-----------+-----------+
 
 FFTData Class
 -------------
@@ -160,5 +153,3 @@ This class can be found within bifrost_fft.py. It performs operations on Bifrost
     In [3]: transformed = dd.get_tfft('r', snap = [430, 431, 432], iiy = 20)
 
     In [4]: transformed.keys()
-
-

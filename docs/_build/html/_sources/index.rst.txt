@@ -16,6 +16,5 @@ Contents:
 .. toctree::
    :maxdepth: 3
 
-   helita.rst
+   helita.ipynb
    bq_t5.rst
-   FFTData_demo.ipynb
