@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Welcome to helita and bifrost documentation! &mdash; bifrostDocs 1.0 documentation</title>
+  <title>FFT Data Demo &mdash; bifrostDocs 1.0 documentation</title>
   
 
   
@@ -28,8 +28,7 @@
     <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="helita" href="helita.html" /> 
+    <link rel="search" title="Search" href="search.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -48,7 +47,7 @@
           
 
           
-            <a href="#" class="icon icon-home"> bifrostDocs
+            <a href="index.html" class="icon icon-home"> bifrostDocs
           
 
           
@@ -100,7 +99,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="#">bifrostDocs</a>
+          <a href="index.html">bifrostDocs</a>
         
       </nav>
 
@@ -129,15 +128,15 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="#">Docs</a> &raquo;</li>
+      <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>Welcome to helita and bifrost documentation!</li>
+      <li>FFT Data Demo</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/FFTData_demo_copy.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -169,42 +168,25 @@
     margin-right: 4px;  /* make room for the exclamation icon */
 }
 </style>
-<div class="section" id="welcome-to-helita-and-bifrost-documentation">
-<h1>Welcome to helita and bifrost documentation!<a class="headerlink" href="#welcome-to-helita-and-bifrost-documentation" title="Permalink to this headline">¶</a></h1>
-<p>By Carmel Baharav, Juan Martinez-Sykora &amp; Tiago M. D. Pereira.</p>
-<p>Last updated on Jun 12, 2018.</p>
-<p>Contents:</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="helita.html">helita</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="helita.html#installation">Installation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="helita.html#pre-requisites">Pre-requisites</a></li>
-<li class="toctree-l3"><a class="reference internal" href="helita.html#cloning-git-repository">Cloning git repository</a></li>
-<li class="toctree-l3"><a class="reference internal" href="helita.html#non-root-install">Non-root install</a></li>
-<li class="toctree-l3"><a class="reference internal" href="helita.html#developer-install">Developer install</a></li>
-<li class="toctree-l3"><a class="reference internal" href="helita.html#installing-with-different-c-or-fortran-compilers">Installing with different C or Fortran compilers</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="helita.html#bifrost-py">bifrost.py</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="helita.html#bifrostdata-class">BifrostData Class</a></li>
-<li class="toctree-l3"><a class="reference internal" href="helita.html#getting-variables-quantities">Getting Variables &amp; Quantities</a></li>
-<li class="toctree-l3"><a class="reference internal" href="helita.html#fftdata-class">FFTData Class</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="bq_t5.html">bq_t5_look Tool</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="bq_t5.html#setup">Setup</a></li>
-<li class="toctree-l2"><a class="reference internal" href="bq_t5.html#launch">Launch</a></li>
-<li class="toctree-l2"><a class="reference internal" href="bq_t5.html#description">Description</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="bq_t5.html#initial-window">Initial Window</a></li>
-<li class="toctree-l3"><a class="reference internal" href="bq_t5.html#overlays-additional-settings">Overlays &amp; Additional Settings</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="FFTData_demo.html">FFT Data Demo</a></li>
-</ul>
+<div class="section" id="fft-data-demo">
+<h1>FFT Data Demo<a class="headerlink" href="#fft-data-demo" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">helita.sim</span> <span class="kn">import</span> <span class="n">bifrost_fft</span> <span class="k">as</span> <span class="n">brft</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dd</span> <span class="o">=</span> <span class="n">brft</span><span class="o">.</span><span class="n">FFTData</span><span class="p">(</span><span class="n">file_root</span> <span class="o">=</span> <span class="s1">&#39;cb10f&#39;</span><span class="p">,</span> <span class="n">fdir</span> <span class="o">=</span> <span class="s1">&#39;/net/opal/Volumes/Amnesia/mpi3drun/Granflux&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">transformed</span> <span class="o">=</span> <span class="n">dd</span><span class="o">.</span><span class="n">get_tfft</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">snap</span> <span class="o">=</span> <span class="p">[</span><span class="mi">430</span><span class="p">,</span> <span class="mi">431</span><span class="p">,</span> <span class="mi">432</span><span class="p">],</span> <span class="n">iiy</span> <span class="o">=</span> <span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="mi">544</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">transformed</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dict_keys</span><span class="p">([</span><span class="s1">&#39;freq&#39;</span><span class="p">,</span> <span class="s1">&#39;ftCube&#39;</span><span class="p">])</span>
+</pre></div>
 </div>
 </div>
 
@@ -213,13 +195,6 @@
            
           </div>
           <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="helita.html" class="btn btn-neutral float-right" title="helita" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-    </div>
   
 
   <hr/>
