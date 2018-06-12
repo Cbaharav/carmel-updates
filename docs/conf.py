@@ -37,9 +37,9 @@ import sphinx_rtd_theme
 # sys.path.append(os.path.abspath('sphinxext'))
 extensions = ['sphinx.ext.viewcode',
 			   'nbsphinx',
-			   'sphinx.ext.mathjax',
-               'IPython.sphinxext.ipython_console_highlighting',
-               'IPython.sphinxext.ipython_directive']
+			   'sphinx.ext.mathjax']
+               # 'IPython.sphinxext.ipython_console_highlighting',
+               # 'IPython.sphinxext.ipython_directive']
 # only need this section to work on machine:
 # import sys
 # from unittest.mock import MagicMock
@@ -61,7 +61,7 @@ extensions = ['sphinx.ext.viewcode',
 #               'IPython.sphinxext.ipython_console_highlighting',
 #               'IPython.sphinxext.ipython_directive']
 
-ipython_mplbackend = None
+# ipython_mplbackend = None
 # Sphinx.add_directive('ipython', IPythonDirective)               
 
 # Add any paths that contain templates here, relative to this directory.

@@ -341,7 +341,7 @@ div.nboutput div.output_area.stderr {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">helita.sim</span> <span class="kn">import</span> <span class="n">bifrost_fft</span> <span class="k">as</span> <span class="n">brft</span>
+<span></span>from helita.sim import bifrost_fft as brft
 </pre></div>
 </div>
 </div>
@@ -351,7 +351,7 @@ div.nboutput div.output_area.stderr {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">dd</span> <span class="o">=</span> <span class="n">brft</span><span class="o">.</span><span class="n">FFTData</span><span class="p">(</span><span class="n">file_root</span> <span class="o">=</span> <span class="s1">&#39;cb10f&#39;</span><span class="p">,</span> <span class="n">fdir</span> <span class="o">=</span> <span class="s1">&#39;/net/opal/Volumes/Amnesia/mpi3drun/Granflux&#39;</span><span class="p">)</span>
+<span></span>dd = brft.FFTData(file_root = &#39;cb10f&#39;, fdir = &#39;/net/opal/Volumes/Amnesia/mpi3drun/Granflux&#39;)
 </pre></div>
 </div>
 </div>
@@ -361,7 +361,7 @@ div.nboutput div.output_area.stderr {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">transformed</span> <span class="o">=</span> <span class="n">dd</span><span class="o">.</span><span class="n">get_tfft</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">snap</span> <span class="o">=</span> <span class="p">[</span><span class="mi">430</span><span class="p">,</span> <span class="mi">431</span><span class="p">,</span> <span class="mi">432</span><span class="p">],</span> <span class="n">iiy</span> <span class="o">=</span> <span class="mi">20</span><span class="p">)</span>
+<span></span>transformed = dd.get_tfft(&#39;r&#39;, snap = [430, 431, 432], iiy = 20)
 </pre></div>
 </div>
 </div>
@@ -379,7 +379,7 @@ div.nboutput div.output_area.stderr {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">transformed</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+<span></span>transformed.keys()
 </pre></div>
 </div>
 </div>
