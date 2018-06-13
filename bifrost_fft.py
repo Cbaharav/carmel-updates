@@ -161,7 +161,7 @@ class FFTData(BifrostData):
         else:
             self.evenDt = self.dt[0]
 
-    def get_tfft(self, quantity, snap, numThreads=1, numBlocks=1,
+    def get_fft(self, quantity, snap, numThreads=1, numBlocks=1,
                 iix=None, iiy=None, iiz=None):
         """
         Calculates FFT (by calling fftHelper) based on time
