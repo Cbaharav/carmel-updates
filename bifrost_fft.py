@@ -183,7 +183,7 @@ class FFTData(BifrostData):
 
         Notes
         -----
-            uses reikna (cuda & openCL) if available
+            uses reikna (cuda & openCL) if available and run_gpu has been called
         """
 
         # gets data cube, already sliced with iix/iiy/iiz
@@ -262,12 +262,11 @@ def singleRun(arr):
         - could be entire array, or a piece of a larger array
     runs linearly
     """
-    print(np.shape(arr))
     transformed_piece = np.abs(np.fft.fftshift((np.fft.fft(arr)), axes=-1))
     return transformed_piece
 
 
-def threadTask(task, numThreads, *args):
+def threadTask(task, numThreads, arr):
     """
     Threads a given method using python multiprocessing
 
@@ -275,7 +274,7 @@ def threadTask(task, numThreads, *args):
     ----------
     task - method to be parallelized
     numThreads - number of threads to be run in parallel
-    *args - parameters for the task
+    arr - the preTransformed data cube
 
     Returns
     -------
@@ -285,14 +284,9 @@ def threadTask(task, numThreads, *args):
     -----
         does not use cuda, uses python multiprocessing
     """
-    # split arg arrays
-    args = list(args)
+    args = np.array_split(arr, numThreads)
 
-    for index in range(np.shape(args)[0]):
-        args[index] = np.array_split(args[index], numThreads)
-
-    print(np.shape(args))
-    # make threadpool, task = task, with zipped args
+    # make threadpool, task = task given
     pool = ThreadPool(processes=numThreads)
-    result = np.concatenate(pool.map(task, args)[0])
+    result = np.concatenate(pool.map(task, args))
     return result
