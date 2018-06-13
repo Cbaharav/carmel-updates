@@ -15,7 +15,7 @@ dd.preTransform = np.sin(8 * x)
 dd.freq = np.fft.fftshift(np.fft.fftfreq(np.size(x)))
 dd.run_gpu(False)
 # preTransform is already set
-tester = dd.get_tfft('not a real var', snap='test')
+tester = dd.get_fft('not a real var', snap='test')
 fig = plt.figure()
 
 numC = 3
@@ -48,7 +48,7 @@ ax2.set_title('gaussian curve')
 
 # plotting transformation of gaussian signal
 dd.freq = np.fft.fftshift(np.fft.fftfreq(np.size(x)))
-ft = dd.get_tfft('not a real var', snap='test')  # preTransform is already set
+ft = dd.get_fft('not a real var', snap='test')  # preTransform is already set
 ax3 = fig.add_subplot(numC, numR, 4)
 ax3.plot(ft['freq'], ft['ftCube'])
 ax3.set_xlim(-.03, .03)
@@ -64,7 +64,7 @@ ax4.set_title('y = 0')
 
 # plotting transformed signal
 dd.freq = np.fft.fftshift(np.fft.fftfreq(np.size(x)))
-ft = dd.get_tfft('not a real var', snap='test')  # preTransform is already set
+ft = dd.get_fft('not a real var', snap='test')  # preTransform is already set
 ax5 = fig.add_subplot(numC, numR, 6)
 ax5.plot(ft['freq'], ft['ftCube'])
 ax5.set_title('ft of y = 0')

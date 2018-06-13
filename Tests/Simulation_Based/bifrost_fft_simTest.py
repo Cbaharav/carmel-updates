@@ -11,7 +11,7 @@ dd = FFTData(file_root='cb10f',
              fdir='/net/opal/Volumes/Amnesia/mpi3drun/Granflux', verbose=True)
 
 # getting ft
-transformed = dd.get_tfft(v, snaps)
+transformed = dd.get_fft(v, snaps)
 print('got fft')
 ft = transformed['ftCube']
 freq = transformed['freq']
