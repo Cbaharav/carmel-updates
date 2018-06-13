@@ -17,7 +17,7 @@
     "raw_mimetype": "text/restructuredtext"
    },
    "source": [
-    "Helita documentation can be found here (this section is taken from this link):\n",
+    "Helita documentation can be found here (the installation section is taken from this link):\n",
     "\n",
     "http://helita.readthedocs.io/en/latest/index.html\n",
     "\n",
@@ -30,23 +30,27 @@
     "\n",
     "Pre-requisites\n",
     "--------------\n",
-    "To make use of helita **you need a Fortran compiler** (`GFortran <https://gcc.gnu.org/wiki/GFortran>`_ is recommended), because some modules are compiled from Fortran. Before attempting to install helita, you also need the following:\n",
     "\n",
-    "* `Python (2.7.x, 3.4.x or later) <https://www.python.org>`_\n",
-    "* `Astropy <http://www.astropy.org>`_\n",
-    "* `NumPy <http://www.numpy.org>`_\n",
-    "* `SciPy <https://www.scipy.org>`_\n",
+    "To make use of helita **you need a Fortran compiler** (`GFortran <https://gcc.gnu.org/wiki/GFortran>`_ is recommended), because some modules are compiled from Fortran. The packages in the left column should be installed before installing helita. The right column contains recommended packages that allow the user to take advantage of all of the features.\n",
     "\n",
-    "In addition, the following packages are recommended to take advantage of all the features:\n",
-    "\n",
-    "* `Matplotlib <https://matplotlib.org>`_\n",
-    "* `h5py <http://www.h5py.org>`_\n",
-    "* `netCDF4 <https://unidata.github.io/netcdf4-python/>`_\n",
-    "* `Cython <http://cython.org>`_\n",
-    "* `pandas <http://pandas.pydata.org>`_\n",
-    "* `beautifulsoup4 <https://www.crummy.com/software/BeautifulSoup/>`_\n",
-    "\n",
-    "Helita will install without the above packages, but functionality will be limited. All of these packages are available through Anaconda, and that is the recommended way of setting up your Python distribution.\n",
+    ".. list-table::\n",
+    "    :align: center\n",
+    "    :header-rows: 1\n",
+    "    \n",
+    "    * - Required\n",
+    "      - Recommended\n",
+    "    * - * `Python (2.7.x, 3.4.x or later) <https://www.python.org>`_\n",
+    "        * `Astropy <http://www.astropy.org>`_\n",
+    "        * `NumPy <http://www.numpy.org>`_\n",
+    "        * `SciPy <https://www.scipy.org>`_\n",
+    "      - * `Matplotlib <https://matplotlib.org>`_\n",
+    "        * `h5py <http://www.h5py.org>`_\n",
+    "        * `netCDF4 <https://unidata.github.io/netcdf4-python/>`_\n",
+    "        * `Cython <http://cython.org>`_\n",
+    "        * `pandas <http://pandas.pydata.org>`_\n",
+    "        * `beautifulsoup4 <https://www.crummy.com/software/BeautifulSoup/>`_\n",
+    "        \n",
+    "Helita will install without the recommended packages, but functionality will be limited. All of these packages are available through Anaconda, and that is the recommended way of setting up your Python distribution.\n",
     "\n",
     "Cloning git repository\n",
     "----------------------\n",
@@ -94,7 +98,7 @@
     "==========\n",
     "bifrost.py is a set of tools to read and interact with output from Bifrost simulations.\n",
     "\n",
-    "BifrostData Class\n",
+    "BifrostData class\n",
     "-----------------\n",
     "bifrost.py includes the BifrostData class (among others). The following allows to create the class for snapshot number 430 from simulation 'cb10f' from directory '/net/opal/Volumes/Amnesia/mpi3drun/Granflux':"
    ]
@@ -129,7 +133,7 @@
    "source": [
     "The snapshot(s) being read can be defined when creating the object, or set/changed anytime later. Snaps can be ints, arrays, or lists. \n",
     "\n",
-    "Getting Variables & Quantities\n",
+    "Getting variables & quantities\n",
     "------------------------------\n",
     "get_var and get_varTime can be used to read variables as well as to calculate quantities (with a call to _get_quantity). iix, iiy, and iiz can be specified to slice the return array (they can be ints, arrays, or lists). If iix, iiy, or iiz is not specified, get_var will read all the numerical domain along the x, y, or z axis, respectively. If no snapshot is specified, the current snap value will be used (either the initialized one, which is the first in the series, or the most recent snap used in set_snap or in a call to get_var). To get variable 'r' at snap 430 with only values at y = 200, z = 5, and z = 7:"
    ]
@@ -244,7 +248,7 @@
     "\t* - Wave forces\n",
     "\t  - alf, fast, long\n",
     "\n",
-    "FFTData Class\n",
+    "FFTData class\n",
     "-------------\n",
     "This class can be found within bifrost_fft.py. It performs operations on Bifrost simulation data in its native format. After creating a class for a specific snap root name and directory (much like with BifrostData), one can get a dictionary of the frequency and amplitude of the Fourier Transform for a certain quantity over a range of snapshots."
    ]
@@ -318,7 +322,7 @@
    "source": [
     "Depending on the number of snaps and the size of the cube, using cuda or python multiprocessing may speed up the calculation.\n",
     "\n",
-    "1. Using Cuda\n",
+    "1. Using cuda\n",
     "^^^^^^^^^^^^^\n",
     "If pycuda is available, the code imports reikna (a python library that contains fft functions using pycuda). In order to make use of the GPU, use the function run_gpu(). The default is to **not** use the GPU, even if there is one available."
    ]
@@ -361,7 +365,7 @@
     "raw_mimetype": "text/restructuredtext"
    },
    "source": [
-    "2. Using Python Multiprocessing\n",
+    "2. Using python multiprocessing\n",
     "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n",
     "This can be used whether or not pycuda is available, as multiprocessing is a library that comes with python. It makes use of threading on the CPU. In order to use a multiprocessing threadpool when calculating the Fourier Transform, specify numThreads with a number greater than 1, when calling get_tfft():"
    ]
@@ -369,7 +373,9 @@
   {
    "cell_type": "code",
    "execution_count": 12,
-   "metadata": {},
+   "metadata": {
+    "collapsed": true
+   },
    "outputs": [],
    "source": [
     "usingThreads = dd.get_tfft('bx', snap = [400, 401, 402], numThreads = 10)"
