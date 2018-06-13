@@ -662,7 +662,7 @@ WARNING: cstagger use has been turned off, turn it back on with &#34;dd.cstagop 
 </pre></div>
 </div>
 </div>
-<p>When get_tfft() is called, the GPU will be used in accordance with the last call to run_gpu(). If the GPU has limited memory, the user can specify numBlocks in the call to get_tfft. This will send the calculation over to the GPU in several blocks as opposed to all at once. To use 5 different blocks, a call would look like this:</p>
+<p>When get_fft() is called, the GPU will be used in accordance with the last call to run_gpu(). If the GPU has limited memory, the user can specify numBlocks in the call to get_fft. This will send the calculation over to the GPU in several blocks as opposed to all at once. To use 5 different blocks, a call would look like this:</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [11]:
@@ -676,7 +676,7 @@ WARNING: cstagger use has been turned off, turn it back on with &#34;dd.cstagop 
 </div>
 <div class="section" id="2.-Using-python-multiprocessing">
 <h4>2. Using python multiprocessing<a class="headerlink" href="#2.-Using-python-multiprocessing" title="Permalink to this headline">¶</a></h4>
-<p>This can be used whether or not pycuda is available, as multiprocessing is a library that comes with python. It makes use of threading on the CPU. In order to use a multiprocessing threadpool when calculating the Fourier Transform, specify numThreads with a number greater than 1, when calling get_tfft():</p>
+<p>This can be used whether or not pycuda is available, as multiprocessing is a library that comes with python. It makes use of threading on the CPU. In order to use a multiprocessing threadpool when calculating the Fourier Transform, specify numThreads with a number greater than 1, when calling get_fft():</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [12]:
