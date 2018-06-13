@@ -96,7 +96,11 @@
 <li class="toctree-l2"><a class="reference internal" href="#bifrost.py">bifrost.py</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#BifrostData-Class">BifrostData Class</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#Getting-Variables-&amp;-Quantities">Getting Variables &amp; Quantities</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#FFTData-Class">FFTData Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#FFTData-Class">FFTData Class</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#1.-Using-Cuda">1. Using Cuda</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#2.-Using-Python-Multiprocessing">2. Using Python Multiprocessing</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -626,6 +630,47 @@ WARNING: cstagger use has been turned off, turn it back on with &#34;dd.cstagop 
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
 <span></span>dict_keys([&#39;freq&#39;, &#39;ftCube&#39;])
 </pre></div>
+</div>
+</div>
+<p>Depending on the number of snaps and the size of the cube, using cuda or python multiprocessing may speed up the calculation.</p>
+<div class="section" id="1.-Using-Cuda">
+<h4>1. Using Cuda<a class="headerlink" href="#1.-Using-Cuda" title="Permalink to this headline">¶</a></h4>
+<p>If pycuda is available, the code imports reikna (a python library that contains fft functions using pycuda). In order to make use of the GPU, use the function run_gpu(). The default is to <strong>not</strong> use the GPU, even if there is one available.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">dd</span><span class="o">.</span><span class="n">run_gpu</span><span class="p">()</span> <span class="c1"># to use GPU</span>
+<span class="n">dd</span><span class="o">.</span><span class="n">run_gpu</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span> <span class="c1"># to stop use of GPU</span>
+</pre></div>
+</div>
+</div>
+<p>When get_tfft() is called, the GPU will be used in accordance with the last call to run_gpu(). If the GPU has limited memory, the user can specify numBlocks in the call to get_tfft. This will send the calculation over to the GPU in several blocks as opposed to all at once. To use 5 different blocks, a call would look like this:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">usingBlocks</span> <span class="o">=</span> <span class="n">dd</span><span class="o">.</span><span class="n">get_tfft</span><span class="p">(</span><span class="s1">&#39;bx&#39;</span><span class="p">,</span> <span class="n">snap</span> <span class="o">=</span> <span class="p">[</span><span class="mi">400</span><span class="p">,</span> <span class="mi">401</span><span class="p">,</span> <span class="mi">402</span><span class="p">],</span> <span class="n">numBlocks</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="2.-Using-Python-Multiprocessing">
+<h4>2. Using Python Multiprocessing<a class="headerlink" href="#2.-Using-Python-Multiprocessing" title="Permalink to this headline">¶</a></h4>
+<p>This can be used whether or not pycuda is available, as multiprocessing is a library that comes with python. It makes use of threading on the CPU. In order to use a multiprocessing threadpool when calculating the Fourier Transform, specify numThreads with a number greater than 1, when calling get_tfft():</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">usingThreads</span> <span class="o">=</span> <span class="n">dd</span><span class="o">.</span><span class="n">get_tfft</span><span class="p">(</span><span class="s1">&#39;bx&#39;</span><span class="p">,</span> <span class="n">snap</span> <span class="o">=</span> <span class="p">[</span><span class="mi">400</span><span class="p">,</span> <span class="mi">401</span><span class="p">,</span> <span class="mi">402</span><span class="p">],</span> <span class="n">numThreads</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
 </div>
 </div>
 </div>

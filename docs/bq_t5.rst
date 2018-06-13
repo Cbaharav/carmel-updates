@@ -10,7 +10,7 @@ This tool can be used to visualize and manipulate data sets produced by Bifrost 
 Setup
 =====
 .. Note::
-	The Bifrost code, which includes this tool is **not** publicly available yet.
+	The Bifrost code, which includes this tool, is **not** publicly available yet.
 
 This tool can be found in Bifrost (which is a separate folder from helita), and requires that helita be installed in order to function. Once you have created a path for the Bifrost folder, add that path to your .cshrc, eg::
 
