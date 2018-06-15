@@ -1,5 +1,5 @@
 ***************
-bq_t5_look Tool
+bq_t5_look tool
 ***************
 This tool can be used to visualize and manipulate data sets produced by Bifrost (and Ebysus) simulations. Previous tools were written in IDL, but this tool is written in Python, increasing accessibility. It also has a range of added features including the creation of movies and animations.
 
@@ -35,7 +35,7 @@ Description
 
 .. image:: description.png
 
-Initial Window
+Initial window
 --------------
 	* Slider: moves through third dimension
 	* Variable choice: select variable to be plotted from dropdown
@@ -43,7 +43,7 @@ Initial Window
 	* Plane view: select plane view from dropdown
 	* Control of overlays: quickly add or remove overlays specified in respective window
 
-Overlays & Additional Settings
+Overlays & additional settings
 ------------------------------
 Each of the overlays (vectors, lines, and contour) has its own corresponding pop-up settings window that can be opened from the initial page of the tool. As previously mentioned, the initial window also has the option to quickly hide/reveal a previously loaded overlay. By default, all overlays are shown once a quantity is specified.
 
@@ -98,7 +98,7 @@ Plotting contours allows the user to display two scalar quantities simultaneousl
 
 =====
 
-4. Additional Display Features
+4. Additional display features
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 .. figure:: display_settings.png
 	:align: right
@@ -118,7 +118,7 @@ The repeated features are:
 
 =====
 
-5. Movies and Animation
+5. Movies and animation
 ^^^^^^^^^^^^^^^^^^^^^^^
 .. figure:: animation_settings.png
 	:align: right

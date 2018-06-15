@@ -4,11 +4,11 @@ from helita.sim.bifrost import BifrostData, Rhoeetab, read_idl_ascii
 from helita.sim.bifrost_fft import FFTData
 import matplotlib.pyplot as plt
 
-snaps = np.arange(430, 433)
+snaps = np.arange(280, 360)
 v = 'bx'
 
-dd = FFTData(file_root='cb10f',
-             fdir='/net/opal/Volumes/Amnesia/mpi3drun/Granflux', verbose=True)
+dd = FFTData(file_root='l2d90x40r_it',
+             fdir='/net/opal/Volumes/Amnesia/mpi3drun/2Druns/genohm/rain/l2d90x40r/', verbose=True)
 
 # getting ft
 transformed = dd.get_fft(v, snaps)
@@ -16,12 +16,12 @@ print('got fft')
 ft = transformed['ftCube']
 freq = transformed['freq']
 zaxis = dd.z
-
+print(np.shape(ft))
 # making empty array to later contain the avergaes for each z position
-zstack = np.empty([np.size(freq), np.shape(ft)[2]])
+zstack = np.empty([np.size(freq), np.shape(ft)[1]])
 # filling ztack with average ft for each (x,y) in each z level
-for k in range(0, np.shape(ft)[2]):
-    avg = np.average(ft[:, :, k], axis=(0, 1))
+for k in range(0, np.shape(ft)[1]):
+    avg = np.average(ft[:, k, :], axis=(0))
     zstack[:, k] = avg
 
 # preparing plots
